@@ -4,12 +4,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractDataBase 
+public abstract  class AbstractDataBase 
 {
     // URL: "/DataBase/ShopDataBase.db";
     
     //=========================================Connection=========================================
-    protected  Connection getConnection(String url)
+    protected Connection getConnection(String url)
     {
         String dataBaseUrl = "jdbc:sqlite:." + url;
         try
