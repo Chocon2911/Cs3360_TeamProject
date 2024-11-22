@@ -1,4 +1,4 @@
-package DataBase;
+package DataBase.Base;
 
 public enum DataBaseType 
 {
