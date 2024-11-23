@@ -1,6 +1,7 @@
 package Obj.Base;
 
 import Util.ObjUtil;
+import javax.swing.*;
 
 public abstract class AbstractObj extends ObjUtil
 {
@@ -61,4 +62,5 @@ public abstract class AbstractObj extends ObjUtil
     //==========================================DataBase==========================================
     protected abstract void queryInfo();
     protected abstract void updateInfo();
+    public abstract JPanel displayInfo();
 }

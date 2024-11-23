@@ -1,8 +1,11 @@
 package UI.App2;
 
-// import Obj.Main.Shop;
+import Obj.Main.Shop;
+import Obj.Main.Shop;
 import Util.GuiUtil;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +14,7 @@ import javax.swing.*;
 public class ShopUI extends GuiUtil
 {
     //==========================================Variable==========================================
-    // private Shop shop;
+    private Shop shop;
 
     //========================================Constructor=========================================
     public ShopUI()
@@ -42,7 +45,7 @@ public class ShopUI extends GuiUtil
         // Title Label
         JLabel titleLabel = new JLabel("Shop");
         this.setAlignmentCenter(titleLabel);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, titleSize));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
 
         // Information Button
         JButton infoButton = createButton("Information", bigButtonWidth, bigButtonHeight);
@@ -122,12 +125,57 @@ public class ShopUI extends GuiUtil
         frame.setSize(frameWidth, frameHeight);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+
+
+        // ===Panel===
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        // Title Label
+        JLabel titleLabel = new JLabel("Information");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
+        this.setAlignmentCenter(titleLabel);
+
+        // Display
+        panel.add(Box.createVerticalGlue());
+        panel.add(titleLabel);
+        panel.add(Box.createHorizontalStrut(verticalStrut));
+        panel.add(shop.displayInfo());
+        panel.add(Box.createVerticalGlue());
+
+        // ===Back Button===
+        JButton backButton = this.createButton("Back", smallButtonWidth, smallButtonHeight);
+        backButton.setAlignmentY(Component.TOP_ALIGNMENT);;
+        backButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                frame.dispose();
+                displayMain();
+            }
+        });
+
+
+
+        // ===scrollPane===
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(30);
+
+        // ===Display===
+        frame.add(backButton, BorderLayout.EAST);
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(scrollPane, BorderLayout.WEST);
+        frame.setVisible(true);
     }
 
     //=====================================Create Manager UI======================================
     private void displayCreateManager()
     {
-
+        
     }
 
     //===================================Change CheckIn Code UI===================================

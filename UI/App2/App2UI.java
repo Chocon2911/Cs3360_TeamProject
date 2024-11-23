@@ -31,7 +31,7 @@ public class App2UI extends GuiUtil
         // Title Label
         JLabel titleLabel = new JLabel("App2");
         this.setAlignmentCenter(titleLabel);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, titleSize));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
         
         // Login Button
         JButton loginButton = createButton("Login", bigButtonWidth, bigButtonHeight);
@@ -105,7 +105,7 @@ public class App2UI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Login");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, titleSize));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
         this.setAlignmentCenter(titleLabel);
 
 
@@ -114,7 +114,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel userNamePanel = new JPanel();
         userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(userNamePanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(userNamePanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // UserName Label
         JLabel userNameLabel = new JLabel("User Name:");
@@ -136,7 +136,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel passwordPanel = new JPanel();
         passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(passwordPanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(passwordPanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Password Label
         JLabel passwordLabel = new JLabel("Password:");
@@ -158,7 +158,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(buttonPanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(buttonPanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Cancel Button
         JButton cancelButton = createButton("Cancel", smallButtonWidth, smallButtonHeight);
@@ -234,7 +234,7 @@ public class App2UI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Sign Up");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, titleSize));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
         this.setAlignmentCenter(titleLabel);
         
 
@@ -243,7 +243,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(namePanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(namePanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Name Label
         JLabel nameLabel = new JLabel("Name:");
@@ -265,7 +265,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel userNamePanel = new JPanel();
         userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(userNamePanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(userNamePanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Label
         JLabel userNameLabel = new JLabel("User Name:");
@@ -287,7 +287,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel passwordPanel = new JPanel();
         passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(passwordPanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(passwordPanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Label
         JLabel passwordLabel = new JLabel("Password:");
@@ -309,7 +309,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel systemCodePanel = new JPanel();
         systemCodePanel.setLayout(new BoxLayout(systemCodePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(systemCodePanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(systemCodePanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Label
         JLabel systemCodeLabel = new JLabel("System Code:");
@@ -331,7 +331,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel checkInCodePanel = new JPanel();
         checkInCodePanel.setLayout(new BoxLayout(checkInCodePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(checkInCodePanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(checkInCodePanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Label
         JLabel checkInCodeLabel = new JLabel("Check In Code:");
@@ -353,7 +353,7 @@ public class App2UI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(buttonPanel, panelFieldWidth, panelFieldHeight);
+        this.setFixedSize(buttonPanel, panelTextFieldWidth, panelTextFieldHeight);
 
         // Cancel Button
         JButton cancelButton = createButton("Cancel", smallButtonWidth, smallButtonHeight);

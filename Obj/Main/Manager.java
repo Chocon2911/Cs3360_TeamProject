@@ -2,6 +2,7 @@ package Obj.Main;
 
 import DataBase.Child.ManagerDb;
 import Obj.Base.AbstractAccount;
+import javax.swing.*;
 
 public class Manager extends AbstractAccount
 {
@@ -60,5 +61,10 @@ public class Manager extends AbstractAccount
     public void updateInfo()
     {
         new ManagerDb().updateManagerData(this);
+    }
+    @Override
+    public JPanel displayInfo()
+    {
+        return null;
     }
 }

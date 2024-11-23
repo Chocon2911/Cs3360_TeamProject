@@ -90,10 +90,11 @@ public class ShopDb extends AbstractDataBase
         String checkInCode = datas.get(0).get(4).getValueStr();
         List<Manager> activeManagers = new ManagerDb().queryManagersByShopId(id);
         List<Staff> activeStaffs = new StaffDb().queryStaffsByShopId(id);
+        List<Customer> activeCustomers = new CustomerDb().queryCustomersByShopId(id);
         List<Item> items = new ItemDb().queryItemsByShopId(id);
         List<CustomerRequest> customerRequests = new CustomerRequestDb().queryCustomerRequestsByShopId(id);
 
-        return new Shop(id, name, userName, password, systemCode, checkInCode, activeManagers, activeStaffs, items, customerRequests);
+        return new Shop(id, name, userName, password, systemCode, checkInCode, activeManagers, activeStaffs, activeCustomers, items, customerRequests);
     }
 
     public boolean updateShopData(Shop shop)
