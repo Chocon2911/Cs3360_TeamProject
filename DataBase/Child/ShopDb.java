@@ -80,14 +80,14 @@ public class ShopDb extends AbstractDataBase
         rowTypes.add(DataBaseType.TEXT);
         rowTypes.add(DataBaseType.TEXT);
 
-        List<DataBaseData> datas = this.queryData(url, sql, queryData, rowNames, rowTypes);
+        List<List<DataBaseData>> datas = this.queryDatas(url, sql, queryData, rowNames, rowTypes);
         if (datas.size() == 0) return null;
 
-        String name = datas.get(0).getValueStr();
-        String userName = datas.get(1).getValueStr();
-        String password = datas.get(2).getValueStr();
-        String systemCode = datas.get(3).getValueStr();
-        String checkInCode = datas.get(4).getValueStr();
+        String name = datas.get(0).get(0).getValueStr();
+        String userName = datas.get(0).get(1).getValueStr();
+        String password = datas.get(0).get(2).getValueStr();
+        String systemCode = datas.get(0).get(3).getValueStr();
+        String checkInCode = datas.get(0).get(4).getValueStr();
         List<Manager> activeManagers = new ManagerDb().queryManagersByShopId(id);
         List<Staff> activeStaffs = new StaffDb().queryStaffsByShopId(id);
         List<Item> items = new ItemDb().queryItemsByShopId(id);

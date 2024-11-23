@@ -73,13 +73,14 @@ public class ManagerDb extends AbstractDataBase
         rowTypes.add(DataBaseType.TEXT);
         rowTypes.add(DataBaseType.TEXT);
 
-        List<DataBaseData> datas = this.queryData(url, sql, queryData, rowNames, rowTypes);
+        List<List<DataBaseData>> datas = this.queryDatas(url, sql, queryData, rowNames, rowTypes);
         if (datas.size() == 0) return null;
 
-        String name = datas.get(0).getValueStr();
-        String userName = datas.get(1).getValueStr();
-        String password = datas.get(2).getValueStr();
-        Shop shop = new ShopDb().queryShopData(datas.get(3).getValueStr());
+        String name = datas.get(0).get(0).getValueStr();
+        String userName = datas.get(0).get(1).getValueStr();
+        String password = datas.get(0).get(2).getValueStr();
+        String shopId = datas.get(0).get(3).getValueStr();
+        Shop shop = new ShopDb().queryShopData(shopId);
 
         return new Manager(id, name, userName, password, shop);
     }
