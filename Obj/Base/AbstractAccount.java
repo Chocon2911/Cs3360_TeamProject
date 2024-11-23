@@ -9,12 +9,14 @@ public abstract class AbstractAccount extends AbstractObj
     //========================================Constructor=========================================
     public AbstractAccount()
     {
+        super();
         this.userName = "";
         this.password = "";
     }
 
-    public AbstractAccount(String userName, String password)
+    public AbstractAccount(String id, String name, String userName, String password)
     {
+        super(id, name);
         this.userName = userName;
         this.password = password;
     }
