@@ -3,7 +3,7 @@ package Util;
 import java.awt.*;
 import javax.swing.*;
 
-public class GuiUtil 
+public abstract class GuiUtil
 {
     protected void setFixedSize(JComponent component, int width, int height)
     {

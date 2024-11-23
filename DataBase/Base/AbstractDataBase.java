@@ -1,12 +1,11 @@
 package DataBase.Base;
 
 import Util.ObjUtil;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract  class AbstractDataBase extends ObjUtil
+public abstract class AbstractDataBase extends ObjUtil
 {
     protected static String url = "/DataBase/ShopDataBase.db";
     
@@ -92,7 +91,7 @@ public abstract  class AbstractDataBase extends ObjUtil
     }
 
     //===========================================Query============================================
-    protected List<DataBaseData> queryData(String url, String executeLine, DataBaseData queryData, List<String> colNames, List<DataBaseType> colTypes)
+    protected List<DataBaseData> queryData(String url, String executeLine, DataBaseData queryData, List<String> rowNames, List<DataBaseType> rowTypes)
     {
         Connection conn = getConnection(url);
         if (conn == null) return null;
@@ -125,27 +124,27 @@ public abstract  class AbstractDataBase extends ObjUtil
             List<DataBaseData> data = new ArrayList<>();
             while (resultSet.next())
             {
-                for (int i = 0; i < colNames.size(); i++)
+                for (int i = 0; i < rowNames.size(); i++)
                 {
                     DataBaseData newData = new DataBaseData();
-                    if (colTypes.get(i) == DataBaseType.TEXT)
+                    if (rowTypes.get(i) == DataBaseType.TEXT)
                     {
-                        newData.setValueStr(resultSet.getString(colNames.get(i)));
+                        newData.setValueStr(resultSet.getString(rowNames.get(i)));
                         data.add(newData);
                     }
-                    else if (colTypes.get(i) == DataBaseType.INTEGER)
+                    else if (rowTypes.get(i) == DataBaseType.INTEGER)
                     {
-                        newData.setValueInt(resultSet.getInt(colNames.get(i)));
+                        newData.setValueInt(resultSet.getInt(rowNames.get(i)));
                         data.add(newData);
                     }
-                    else if (colTypes.get(i) == DataBaseType.FLOAT)
+                    else if (rowTypes.get(i) == DataBaseType.FLOAT)
                     {
-                        newData.setValueFloat(resultSet.getFloat(colNames.get(i)));
+                        newData.setValueFloat(resultSet.getFloat(rowNames.get(i)));
                         data.add(newData);
                     }
-                    else if (colTypes.get(i) == DataBaseType.BLOB)
+                    else if (rowTypes.get(i) == DataBaseType.BLOB)
                     {
-                        newData.setValueBlob(resultSet.getBlob(colNames.get(i)));
+                        newData.setValueBlob(resultSet.getBlob(rowNames.get(i)));
                         data.add(newData);
                     }
                     else
@@ -164,8 +163,82 @@ public abstract  class AbstractDataBase extends ObjUtil
         }
     }
 
+    protected List<List<DataBaseData>> queryDatas(String url, String executeLine, DataBaseData queryData, List<String> rowNames, List<DataBaseType> rowTypes)
+    {
+        Connection conn = getConnection(url);
+        if (conn == null) return null;
+
+        try (PreparedStatement preStatement = conn.prepareStatement(executeLine))
+        {
+            if (queryData.getDataBaseType() == DataBaseType.TEXT)
+            {
+                preStatement.setString(1, queryData.getValueStr());
+            }
+            else if (queryData.getDataBaseType() == DataBaseType.INTEGER)
+            {
+                preStatement.setInt(1, queryData.getValueInt());
+            }
+            else if (queryData.getDataBaseType() == DataBaseType.FLOAT)
+            {
+                preStatement.setFloat(1, queryData.getValueFloat());
+            }
+            else if (queryData.getDataBaseType() == DataBaseType.BLOB)
+            {
+                preStatement.setBlob(1, queryData.getValueBlob());
+            }
+            else
+            {
+                System.out.println("DataBaseType is null");
+                return null;
+            }
+
+            ResultSet resultSet = preStatement.executeQuery(executeLine);
+            List<List<DataBaseData>> datas = new ArrayList<>();
+            while (resultSet.next())
+            {
+                List<DataBaseData> data = new ArrayList<>();
+                for (int i = 0; i < rowNames.size(); i++)
+                {
+                    DataBaseData newData = new DataBaseData();
+                    if (rowTypes.get(i) == DataBaseType.TEXT)
+                    {
+                        newData.setValueStr(resultSet.getString(rowNames.get(i)));
+                        data.add(newData);
+                    }
+                    else if (rowTypes.get(i) == DataBaseType.INTEGER)
+                    {
+                        newData.setValueInt(resultSet.getInt(rowNames.get(i)));
+                        data.add(newData);
+                    }
+                    else if (rowTypes.get(i) == DataBaseType.FLOAT)
+                    {
+                        newData.setValueFloat(resultSet.getFloat(rowNames.get(i)));
+                        data.add(newData);
+                    }
+                    else if (rowTypes.get(i) == DataBaseType.BLOB)
+                    {
+                        newData.setValueBlob(resultSet.getBlob(rowNames.get(i)));
+                        data.add(newData);
+                    }
+                    else
+                    {
+                        System.out.println("DataBaseType is null");
+                        return null;
+                    }
+                }
+                datas.add(data);
+            }
+            return datas;
+        }
+        catch (Exception e) 
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
     //===========================================Update===========================================
-    protected boolean updateData(String execute, DataBaseData whereData, String url, List<DataBaseData> datas)
+    protected boolean updateData(String url, String execute, DataBaseData whereData, List<DataBaseData> datas)
     {
         Connection conn = getConnection(url);
         if (conn == null) return false;
@@ -229,7 +302,7 @@ public abstract  class AbstractDataBase extends ObjUtil
     }
 
     //===========================================Delete===========================================
-    protected boolean deleteRow(String execute, DataBaseData data, String url)
+    protected boolean deleteRow(String url, String execute, DataBaseData data)
     {
         Connection conn = getConnection(url);
         if (conn == null) return false;
