@@ -1,34 +1,30 @@
 package UI.App2;
 
-import Obj.Main.Shop;
+// import Obj.Main.Shop;
 import Util.GuiUtil;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class ShopUI extends GuiUtil
 {
     //==========================================Variable==========================================
-    private Shop shop;
+    // private Shop shop;
 
     //========================================Constructor=========================================
     public ShopUI()
     {
-        this.shop = null;
+        // this.shop = null;
         this.displayMain();
     }
 
-    public ShopUI(Shop shop)
-    {
-        this.shop = shop;
-        this.displayMain();
-    }
+    // public ShopUI(Shop shop)
+    // {
+    //     this.shop = shop;
+    //     this.displayMain();
+    // }
 
     //==========================================Main UI===========================================
     private void displayMain()
