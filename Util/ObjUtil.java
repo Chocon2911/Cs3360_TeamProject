@@ -1,6 +1,6 @@
 package Util;
 
-import Obj.ItemType;
+import Obj.Main.ItemType;
 import java.util.Random;
 
 public class ObjUtil extends GuiUtil

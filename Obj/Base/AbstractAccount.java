@@ -1,10 +1,10 @@
-package Obj;
+package Obj.Base;
 
 public abstract class AbstractAccount extends AbstractObj
 {
     //==========================================Variable==========================================
-    private String userName;
-    private String password;
+    protected String userName;
+    protected String password;
 
     //========================================Constructor=========================================
     public AbstractAccount()

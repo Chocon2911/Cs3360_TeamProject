@@ -1,4 +1,4 @@
-package Obj;
+package Obj.Main;
 
 public enum ItemType
 {

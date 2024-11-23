@@ -1,12 +1,12 @@
-package Obj;
+package Obj.Base;
 
 import Util.ObjUtil;
 
 public abstract class AbstractObj extends ObjUtil
 {
     //==========================================Variable==========================================
-    private String id;
-    private String name;
+    protected String id;
+    protected String name;
 
     //========================================Constructor=========================================
     public AbstractObj()
