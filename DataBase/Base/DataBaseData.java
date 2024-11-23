@@ -4,20 +4,24 @@ import java.sql.Blob;
 
 public class DataBaseData 
 {
+    //==========================================Variable==========================================
     private String valueStr;
     private int valueInt;
     private float valueFloat;
     private Blob valueBlob;
     private DataBaseType dataBaseType;
 
+    //========================================Constructor=========================================
     public DataBaseData() {}
 
+    //============================================Get=============================================
     public String getValueStr() { return this.valueStr; }
     public int getValueInt() { return this.valueInt; }
     public float getValueFloat() { return this.valueFloat; }
     public Blob getValueBlob() { return this.valueBlob; }
     public DataBaseType getDataBaseType() { return this.dataBaseType; }
 
+    //===========================================Modify===========================================
     public void setValueStr(String valueStr) 
     { 
         if (this.dataBaseType == null)

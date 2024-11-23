@@ -3,7 +3,7 @@ package Util;
 import Obj.ItemType;
 import java.util.Random;
 
-public class ObjUtil 
+public class ObjUtil extends GuiUtil
 {
     //===========================================Other============================================
     protected String getRandomStr(int length)

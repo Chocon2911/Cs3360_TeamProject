@@ -1,12 +1,14 @@
 package DataBase.Base;
 
+import Util.ObjUtil;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract  class AbstractDataBase 
+public abstract  class AbstractDataBase extends ObjUtil
 {
-    // URL: "/DataBase/ShopDataBase.db";
+    protected static String url = "/DataBase/ShopDataBase.db";
     
     //=========================================Connection=========================================
     protected Connection getConnection(String url)
@@ -163,7 +165,7 @@ public abstract  class AbstractDataBase
     }
 
     //===========================================Update===========================================
-    protected boolean whereData(String execute, DataBaseData whereData, String url, List<DataBaseData> datas)
+    protected boolean updateData(String execute, DataBaseData whereData, String url, List<DataBaseData> datas)
     {
         Connection conn = getConnection(url);
         if (conn == null) return false;

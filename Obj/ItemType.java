@@ -1,6 +1,6 @@
 package Obj;
 
-enum ItemType 
+public enum ItemType
 {
     Food,
     Cloth,
