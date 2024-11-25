@@ -13,6 +13,10 @@ public class DataBaseData
 
     //========================================Constructor=========================================
     public DataBaseData() {}
+    public DataBaseData(String valueStr) { this.valueStr = valueStr; }
+    public DataBaseData(int valueInt) { this.valueInt = valueInt; }
+    public DataBaseData(float valueFloat) { this.valueFloat = valueFloat; }
+    public DataBaseData(Blob valueBlob) { this.valueBlob = valueBlob; }
 
     //============================================Get=============================================
     public String getValueStr() { return this.valueStr; }

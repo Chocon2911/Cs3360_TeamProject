@@ -9,6 +9,76 @@ public abstract class AbstractDataBase extends ObjUtil
 {
     protected static String url = "/DataBase/ShopDataBase.db";
     
+    //===========================================Other============================================
+    private boolean setPreParedStatement(PreparedStatement preStatement, DataBaseData data, int index)
+    {
+        try
+        {
+            if (data.getDataBaseType() == DataBaseType.TEXT)
+            {
+                preStatement.setString(index, data.getValueStr());
+            }
+            else if (data.getDataBaseType() == DataBaseType.INTEGER)
+            {
+                preStatement.setInt(index, data.getValueInt());
+            }
+            else if (data.getDataBaseType() == DataBaseType.FLOAT)
+            {
+                preStatement.setFloat(index, data.getValueFloat());
+            }
+            else if (data.getDataBaseType() == DataBaseType.BLOB)
+            {
+                preStatement.setBlob(index, data.getValueBlob());
+            }
+            else
+            {
+                System.out.println("DataBaseType is null");
+                return false;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return true;
+    }
+    
+    private boolean setDataBaseData(ResultSet resultSet, DataBaseType type, DataBaseData data, String name)
+    {
+        try
+        {
+            if (type == DataBaseType.TEXT)
+            {
+                data.setValueStr(resultSet.getString(name));
+            }
+            else if (type == DataBaseType.INTEGER)
+            {
+                data.setValueInt(resultSet.getInt(name));
+            }
+            else if (type == DataBaseType.FLOAT)
+            {
+                data.setValueFloat(resultSet.getFloat(name));
+            }
+            else if (type == DataBaseType.BLOB)
+            {
+                data.setValueBlob(resultSet.getBlob(name));
+            }
+            else
+            {
+                System.out.println("DataBaseType is null");
+                return false;
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return true;
+    }
+
     //=========================================Connection=========================================
     protected Connection getConnection(String url)
     {
@@ -58,27 +128,7 @@ public abstract class AbstractDataBase extends ObjUtil
         {
             for (int i = 0; i < data.size(); i++)
             {
-                if (data.get(i).getDataBaseType() == DataBaseType.INTEGER)
-                {
-                    preStatement.setInt(i + 1, data.get(i).getValueInt());
-                }
-                else if (data.get(i).getDataBaseType() == DataBaseType.TEXT)
-                {
-                    preStatement.setString(i + 1, data.get(i).getValueStr());
-                }
-                else if (data.get(i).getDataBaseType() == DataBaseType.FLOAT)
-                {
-                    preStatement.setFloat(i + 1, data.get(i).getValueFloat());
-                }
-                else if (data.get(i).getDataBaseType() == DataBaseType.BLOB)
-                {
-                    preStatement.setBlob(i + 1, data.get(i).getValueBlob());
-                }
-                else
-                {
-                    System.out.println("DataBaseType is null");
-                    return false;
-                }
+                if (!this.setPreParedStatement(preStatement, data.get(i), i + 1)) return false;
             }
 
             return true;
@@ -98,27 +148,7 @@ public abstract class AbstractDataBase extends ObjUtil
 
         try (PreparedStatement preStatement = conn.prepareStatement(executeLine))
         {
-            if (queryData.getDataBaseType() == DataBaseType.TEXT)
-            {
-                preStatement.setString(1, queryData.getValueStr());
-            }
-            else if (queryData.getDataBaseType() == DataBaseType.INTEGER)
-            {
-                preStatement.setInt(1, queryData.getValueInt());
-            }
-            else if (queryData.getDataBaseType() == DataBaseType.FLOAT)
-            {
-                preStatement.setFloat(1, queryData.getValueFloat());
-            }
-            else if (queryData.getDataBaseType() == DataBaseType.BLOB)
-            {
-                preStatement.setBlob(1, queryData.getValueBlob());
-            }
-            else
-            {
-                System.out.println("DataBaseType is null");
-                return null;
-            }
+            if (!this.setPreParedStatement(preStatement, queryData, 1)) return null;
 
             ResultSet resultSet = preStatement.executeQuery(executeLine);
             List<List<DataBaseData>> datas = new ArrayList<>();
@@ -128,32 +158,14 @@ public abstract class AbstractDataBase extends ObjUtil
                 for (int i = 0; i < rowNames.size(); i++)
                 {
                     DataBaseData newData = new DataBaseData();
-                    if (rowTypes.get(i) == DataBaseType.TEXT)
+                    if (!this.setDataBaseData(resultSet, rowTypes.get(i), newData, rowNames.get(i))) 
                     {
-                        newData.setValueStr(resultSet.getString(rowNames.get(i)));
-                        data.add(newData);
-                    }
-                    else if (rowTypes.get(i) == DataBaseType.INTEGER)
-                    {
-                        newData.setValueInt(resultSet.getInt(rowNames.get(i)));
-                        data.add(newData);
-                    }
-                    else if (rowTypes.get(i) == DataBaseType.FLOAT)
-                    {
-                        newData.setValueFloat(resultSet.getFloat(rowNames.get(i)));
-                        data.add(newData);
-                    }
-                    else if (rowTypes.get(i) == DataBaseType.BLOB)
-                    {
-                        newData.setValueBlob(resultSet.getBlob(rowNames.get(i)));
-                        data.add(newData);
-                    }
-                    else
-                    {
-                        System.out.println("DataBaseType is null");
                         return null;
                     }
+
+                    data.add(newData);
                 }
+                
                 datas.add(data);
             }
             return datas;
@@ -173,52 +185,13 @@ public abstract class AbstractDataBase extends ObjUtil
 
         try (PreparedStatement preStatement = conn.prepareStatement(execute))
         {
-            if (whereData.getDataBaseType() == DataBaseType.TEXT)
-            {
-                preStatement.setString(1, whereData.getValueStr());
-            }
-            else if (whereData.getDataBaseType() == DataBaseType.INTEGER)
-            {
-                preStatement.setInt(1, whereData.getValueInt());
-            }
-            else if (whereData.getDataBaseType() == DataBaseType.FLOAT)
-            {
-                preStatement.setFloat(1, whereData.getValueFloat());
-            }
-            else if (whereData.getDataBaseType() == DataBaseType.BLOB)
-            {
-                preStatement.setBlob(1, whereData.getValueBlob());
-            }
-            else
-            {
-                System.out.println("DataBaseType is null");
-                return false;
-            }
-
+            if (!this.setPreParedStatement(preStatement, whereData, 1)) return false;
             for (int i = 0; i < datas.size(); i++)
             {
-                if (datas.get(i).getDataBaseType() == DataBaseType.INTEGER)
-                {
-                    preStatement.setInt(i + 2, datas.get(i).getValueInt());
-                }
-                else if (datas.get(i).getDataBaseType() == DataBaseType.TEXT)
-                {
-                    preStatement.setString(i + 2, datas.get(i).getValueStr());
-                }
-                else if (datas.get(i).getDataBaseType() == DataBaseType.FLOAT)
-                {
-                    preStatement.setFloat(i + 2, datas.get(i).getValueFloat());
-                }
-                else if (datas.get(i).getDataBaseType() == DataBaseType.BLOB)
-                {
-                    preStatement.setBlob(i + 2, datas.get(i).getValueBlob());
-                }
-                else
-                {
-                    System.out.println("DataBaseType is null");
-                    return false;
-                }
+                if (!this.setPreParedStatement(preStatement, datas.get(i), i + 2)) return false;
             }
+
+            preStatement.executeUpdate();
             return true;
         }
         catch (Exception e)
@@ -237,27 +210,8 @@ public abstract class AbstractDataBase extends ObjUtil
 
         try (PreparedStatement preStatement = conn.prepareStatement(execute))
         {
-            if (data.getDataBaseType() == DataBaseType.TEXT)
-            {
-                preStatement.setString(1, data.getValueStr());
-            }
-            else if (data.getDataBaseType() == DataBaseType.INTEGER)
-            {
-                preStatement.setInt(1, data.getValueInt());
-            }
-            else if (data.getDataBaseType() == DataBaseType.FLOAT)
-            {
-                preStatement.setFloat(1, data.getValueFloat());
-            }
-            else if (data.getDataBaseType() == DataBaseType.BLOB)
-            {
-                preStatement.setBlob(1, data.getValueBlob());
-            }
-            else
-            {
-                System.out.println("DataBaseType is null");
-                return false;
-            }
+            if (!this.setPreParedStatement(preStatement, data, 1)) return false;
+            
             preStatement.executeUpdate();
             return true;
         }
