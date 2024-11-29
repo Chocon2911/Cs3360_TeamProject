@@ -1,10 +1,8 @@
 package UI.App2;
 
 import Util.GuiUtil;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class App2UI extends GuiUtil
@@ -36,40 +34,28 @@ public class App2UI extends GuiUtil
         // Login Button
         JButton loginButton = createButton("Login", bigButtonWidth, bigButtonHeight);
         this.setAlignmentCenter(loginButton);
-        loginButton.addActionListener(new ActionListener()
+        loginButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                frame.dispose();
-                displayLogin();
-            }
+            frame.dispose();
+            displayLogin();
         });
 
         // SignUp Button
         JButton signUpButton = createButton("Sign Up", bigButtonWidth, bigButtonHeight);
         this.setAlignmentCenter(signUpButton);
-        signUpButton.addActionListener(new ActionListener()
+        signUpButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                frame.dispose();
-                displaySignUp();
-            }
+            frame.dispose();
+            displaySignUp();
         });
         
         // Quit Button
         JButton quitButton = createButton("Quit", bigButtonWidth, bigButtonHeight);
         this.setAlignmentCenter(quitButton);
-        quitButton.addActionListener(new ActionListener()
+        quitButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                frame.dispose();
-                displayQuit();
-            }
+            frame.dispose();
+            displayQuit();
         });
 
         // Display
@@ -163,32 +149,24 @@ public class App2UI extends GuiUtil
         // Cancel Button
         JButton cancelButton = createButton("Cancel", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(cancelButton);
-        cancelButton.addActionListener(new ActionListener() 
+        cancelButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                frame.dispose();
-                displayMain();
-            }    
+            frame.dispose();
+            displayMain();    
         });
         
         // Login Button
         JButton loginButton = createButton("Login", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(loginButton);
-        loginButton.addActionListener(new ActionListener() 
+        loginButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                String userName = userNameTextField.getText();
-                String password = String.valueOf(passwordTextField.getPassword());
-
-                System.out.println("UserName: " + userName);
-                System.out.println("Password: " + password);
-                
-                JOptionPane.showMessageDialog(null, "Login");
-            }    
+            String userName = userNameTextField.getText();
+            String password = String.valueOf(passwordTextField.getPassword());
+            
+            System.out.println("UserName: " + userName);
+            System.out.println("Password: " + password);
+            
+            JOptionPane.showMessageDialog(null, "Login");    
         });
 
         // Display 
@@ -358,49 +336,41 @@ public class App2UI extends GuiUtil
         // Cancel Button
         JButton cancelButton = createButton("Cancel", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(cancelButton);
-        cancelButton.addActionListener(new ActionListener()
+        cancelButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                frame.dispose();
-                displayMain();
-            }
+            frame.dispose();
+            displayMain();
         });
 
         // Register Button
         JButton registerButton = createButton("Register", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(registerButton);
-        registerButton.addActionListener(new ActionListener()
+        registerButton.addActionListener((ActionEvent e) -> 
         {
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                frame.dispose();
-                
-                String name = nameField.getText();
-                String userName = userNameField.getText();
-                String password = String.valueOf(passwordField.getPassword());
-                String systemCode = systemCodeField.getText();
-                String checkInCode = checkInCodeField.getText();
-
-                System.out.println("Name: " + name);
-                System.out.println("UserName: " + userName);
-                System.out.println("Password: " + password);
-                System.out.println("SystemCode: " + systemCode);
-                System.out.println("CheckInCode: " + checkInCode);
-
-                System.out.println("Name: " + name + " - " + "UserName: " + userName + " - " + "Password: " + password + " - " + "SystemCode: " + systemCode + " - " + "CheckInCode: " + checkInCode);
-                JOptionPane.showMessageDialog(null, "Register Success");
-
-                displayMain();
-            }
+            frame.dispose();
+            
+            String name = nameField.getText();
+            String userName = userNameField.getText();
+            String password = String.valueOf(passwordField.getPassword());
+            String systemCode = systemCodeField.getText();
+            String checkInCode = checkInCodeField.getText();
+            
+            System.out.println("Name: " + name);
+            System.out.println("UserName: " + userName);
+            System.out.println("Password: " + password);
+            System.out.println("SystemCode: " + systemCode);
+            System.out.println("CheckInCode: " + checkInCode);
+            
+            System.out.println("Name: " + name + " - " + "UserName: " + userName + " - " + "Password: " + password + " - " + "SystemCode: " + systemCode + " - " + "CheckInCode: " + checkInCode);
+            JOptionPane.showMessageDialog(null, "Register Success");
+            
+            displayMain();
         });
 
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(this.horizontalStrut));
         buttonPanel.add(registerButton);
         buttonPanel.add(Box.createHorizontalGlue());
 

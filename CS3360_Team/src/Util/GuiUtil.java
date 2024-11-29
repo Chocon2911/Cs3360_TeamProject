@@ -35,6 +35,7 @@ public abstract class GuiUtil
     // Font
     protected int bigTitleSize = 50;
     protected int normalTitleSize = 40;
+    protected int smallTitleSize = 30;
 
     protected int normalTextSize = 15;
 

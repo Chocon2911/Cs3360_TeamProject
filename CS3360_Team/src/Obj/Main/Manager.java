@@ -1,70 +1,30 @@
 package Obj.Main;
 
-import DataBase.Child.ManagerDb;
-import Obj.Base.AbstractAccount;
-import javax.swing.*;
+import Obj.Base.BaseAccount;
 
-public class Manager extends AbstractAccount
+public class Manager extends BaseAccount
 {
-    protected Shop shop;
+	//==========================================Variable==========================================
+	private Shop shop;
 
-    //========================================Constructor=========================================
-    public Manager()
-    {
+	//========================================Constructor=========================================
+	public Manager()
+	{
         super();
-        this.shop = null;
-    }
-    public Manager(String id, String name, String userName, String password, Shop shop)
-    {
-        super(id, name, userName, password);
-        this.shop = shop;
-    }
+		this.shop = null;
+	}
 
-    //============================================Get=============================================
-    // Curr Data
-    public Shop getShop()
-    {
-        return this.shop;
-    }
-    public Shop getShopDb()
-    {
-        this.queryInfo();
-        return this.shop;
-    }
+	public Manager(String id, String name, String userName, String password, 
+	boolean isLogin, Shop shop)
+	{
+        super(id, name, userName, password, isLogin);
+		this.shop = shop;
+	}
 
-    //===========================================Modify===========================================
-    public void setShop(Shop shop)
-    {
-        this.queryInfo();
-        this.shop = shop;
-        this.updateInfo();
-    }
+	//============================================Get=============================================
+	public Shop getShop()
+	{ return this.shop; }
 
-    //==========================================Abstract==========================================
-    @Override
-    public void queryInfo()
-    {
-        ManagerDb db = new ManagerDb();
-        Manager queryManager = db.queryManagerData(this.id);
-        if (queryManager == null)
-        {
-            System.out.println("QueryManager is null");
-            return;
-        }
-
-        this.name = queryManager.getName();
-        this.userName = queryManager.getUserName();
-        this.password = queryManager.getPassword();
-        this.shop = queryManager.getShop();
-    }
-    @Override
-    public void updateInfo()
-    {
-        new ManagerDb().updateManagerData(this);
-    }
-    @Override
-    public JPanel displayInfo()
-    {
-        return null;
-    }
+	//============================================Set=============================================
+	public void setShop(Shop shop) { this.shop = shop; }
 }

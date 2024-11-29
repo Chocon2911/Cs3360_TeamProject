@@ -15,10 +15,11 @@ public class ManagerDb extends AbstractDataBase
     {
         String sql = "CREAT TABLE IF NOT EXISTS Managers"
                 + "("
-                + "Id TEXT PRIMARY KEY UNIQUE NOT NULL, "
+                + "Id TEXT PRIMARY KEY, "
                 + "Name TEXT NOT NULL, "
-                + "UserName TEXT NOT NULL, "
+                + "UserName TEXT UNIQUE NOT NULL, "
                 + "Password TEXT NOT NULL, "
+                + "IsLogin INTEGER NOT NULL, "
                 + "ShopId TEXT"
                 + ");";
 
@@ -26,11 +27,11 @@ public class ManagerDb extends AbstractDataBase
     }
 
     //===========================================Insert===========================================
-    public boolean insertManagerData(Manager manager)
+    public String insertManagerData(Manager manager)
     {
         String sql = "INSERT INTO Managers "
-                + "(Id, Name, UserName, Password, ShopId) "
-                + "VALUES (?, ?, ?, ?, ?)";
+                + "(Id, Name, UserName, Password, IsLogin, ShopId) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         List<DataBaseData> data = this.getDataFromManager(manager);
         return this.insertData(url, sql, data);
@@ -39,26 +40,26 @@ public class ManagerDb extends AbstractDataBase
     //===========================================Query============================================
     public Manager queryManagerData(String id)
     {
-        DataBaseData queryData = this.getQueryData(id);
-        String sql = this.getQuerySql();
-        List<String> rowNames = this.getManagersRowNames();
-        List<DataBaseType> rowTypes = this.getManagersRowTypes();
+        DataBaseData queryData = new DataBaseData(id);
+        String sql = "SELECT * FROM Managers WHERE Id = ?";
+        List<String> rowNames = this.getManagerRowNames();
+        List<DataBaseType> rowTypes = this.getManagerRowTypes();
 
         List<List<DataBaseData>> datas = this.queryDatas(url, sql, queryData, rowNames, rowTypes);
-        if (datas.size() == 0) return null;
+        if (datas.isEmpty()) return null;
 
         return this.getManager(datas.get(0));
     }
 
     public List<Manager> queryManagersByShopId(String shopId)
     {
-        String sql = this.getQuerySql();
-        DataBaseData queryData = this.getQueryData(shopId);
-        List<String> rowNames = this.getManagersRowNames();
-        List<DataBaseType> rowTypes = this.getManagersRowTypes();
+        String sql = "SELECT * FROM Managers WHERE ShopId = ?";
+        DataBaseData queryData = new DataBaseData(shopId);
+        List<String> rowNames = this.getManagerRowNames();
+        List<DataBaseType> rowTypes = this.getManagerRowTypes();
 
         List<List<DataBaseData>> datas = this.queryDatas(url, sql, queryData, rowNames, rowTypes);
-        if (datas.size() == 0) return null;
+        if (datas.isEmpty()) return null;
 
         List<Manager> managers = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++)
@@ -71,7 +72,7 @@ public class ManagerDb extends AbstractDataBase
     }
 
     //===========================================Update===========================================
-    public boolean updateManagerData(Manager manager)
+    public String updateManagerData(Manager manager)
     {
         String sql = "UPDATE Managers SET * WHERE Id = ?";
 
@@ -95,38 +96,29 @@ public class ManagerDb extends AbstractDataBase
 
     //===========================================Other============================================
     // Query
-    private DataBaseData getQueryData(String id)
+    private List<String> getManagerRowNames()
     {
-        DataBaseData queryData = new DataBaseData();
-        queryData.setValueStr(id);
-        return queryData;
-    }
-
-    private String getQuerySql()
-    {
-        return "SELECT * FROM Managers WHERE Id = ?";
-    }
-
-    private List<String> getManagersRowNames()
-    {
-        List<String> rowNames = new ArrayList();
+        List<String> rowNames;
+        rowNames = new ArrayList<>();
         rowNames.add("Id");
         rowNames.add("Name");
         rowNames.add("UserName");
         rowNames.add("Password");
+        rowNames.add("IsLogin");
         rowNames.add("ShopId");
 
         return rowNames;
     }
 
-    private List<DataBaseType> getManagersRowTypes()
+    private List<DataBaseType> getManagerRowTypes()
     {
-        List<DataBaseType> rowTypes = new ArrayList();
-        rowTypes.add(DataBaseType.TEXT);
-        rowTypes.add(DataBaseType.TEXT);
-        rowTypes.add(DataBaseType.TEXT);
-        rowTypes.add(DataBaseType.TEXT);
-        rowTypes.add(DataBaseType.TEXT);
+        List<DataBaseType> rowTypes = new ArrayList<>();
+        rowTypes.add(DataBaseType.TEXT);    // Id
+        rowTypes.add(DataBaseType.TEXT);    // Name
+        rowTypes.add(DataBaseType.TEXT);    // UserName
+        rowTypes.add(DataBaseType.TEXT);    // Password
+        rowTypes.add(DataBaseType.INTEGER); // IsLogin
+        rowTypes.add(DataBaseType.TEXT);    // ShopId
 
         return rowTypes;
     }
@@ -137,26 +129,29 @@ public class ManagerDb extends AbstractDataBase
         String name = data.get(1).getValueStr();
         String userName = data.get(2).getValueStr();
         String password = data.get(3).getValueStr();
-        String shopId = data.get(4).getValueStr();
+        boolean isLogin = data.get(4).getValueInt() == 1;
+        String shopId = data.get(5).getValueStr();
 
         Shop shop = new ShopDb().queryShopData(shopId);
-        return new Manager(id, name, userName, password, shop);
+        return new Manager(id, name, userName, password, isLogin, shop);
     }
 
     // Update - Insert
     private List<DataBaseData> getDataFromManager(Manager manager)
     {
-        DataBaseData id = new DataBaseData(manager.getIdDb());
-        DataBaseData name = new DataBaseData(manager.getNameDb());
-        DataBaseData userName = new DataBaseData(manager.getUserNameDb());
-        DataBaseData password = new DataBaseData(manager.getPasswordDb());
-        DataBaseData shopId = new DataBaseData(manager.getShop().getIdDb());
+        DataBaseData id = new DataBaseData(manager.getId());
+        DataBaseData name = new DataBaseData(manager.getName());
+        DataBaseData userName = new DataBaseData(manager.getUserName());
+        DataBaseData password = new DataBaseData(manager.getPassword());
+        DataBaseData isLogin = new DataBaseData(manager.getIsLogin() ? 1 : 0);
+        DataBaseData shopId = new DataBaseData(manager.getShop().getId());
 
         List<DataBaseData> data = new ArrayList<>();
         data.add(id);
         data.add(name);
         data.add(userName);
         data.add(password);
+        data.add(isLogin);
         data.add(shopId);
 
         return data;
