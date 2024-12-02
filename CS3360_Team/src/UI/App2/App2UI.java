@@ -1,5 +1,7 @@
 package UI.App2;
 
+import Controller.Child.App2Ctrl;
+import DataBase.Child.*;
 import Util.GuiUtil;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,9 +9,12 @@ import javax.swing.*;
 
 public class App2UI extends GuiUtil
 {
+    private App2Ctrl ctrl;
+
     //========================================Constructor=========================================
     public App2UI()
     {
+        this.ctrl = new App2Ctrl();
         this.displayMain();
     }
 
@@ -160,13 +165,32 @@ public class App2UI extends GuiUtil
         this.setAlignmentCenter(loginButton);
         loginButton.addActionListener((ActionEvent e) -> 
         {
+            System.out.println("//===========================================Login============================================");
+
             String userName = userNameTextField.getText();
             String password = String.valueOf(passwordTextField.getPassword());
             
             System.out.println("UserName: " + userName);
             System.out.println("Password: " + password);
             
-            JOptionPane.showMessageDialog(null, "Login");    
+            int login = this.ctrl.login(userName, password);
+
+            if (login == 0)
+            {
+                System.out.println("Login Success");
+                JOptionPane.showMessageDialog(null, "Login Success");
+                frame.dispose();
+                new ShopUI(ctrl.getIdByUserName(userName));
+            }
+
+            else if (login == 1) 
+            {
+                JOptionPane.showMessageDialog(null, "User Name Not Found");
+            }
+            else if (login == 2) 
+            {
+                JOptionPane.showMessageDialog(null, "Password Wrong");
+            }
         });
 
         // Display 
@@ -346,9 +370,9 @@ public class App2UI extends GuiUtil
         JButton registerButton = createButton("Register", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(registerButton);
         registerButton.addActionListener((ActionEvent e) -> 
-        {
-            frame.dispose();
-            
+        {   
+            System.out.println("//==========================================Register==========================================");
+
             String name = nameField.getText();
             String userName = userNameField.getText();
             String password = String.valueOf(passwordField.getPassword());
@@ -360,11 +384,19 @@ public class App2UI extends GuiUtil
             System.out.println("Password: " + password);
             System.out.println("SystemCode: " + systemCode);
             System.out.println("CheckInCode: " + checkInCode);
+
+            int signUp = this.ctrl.signUp(name, userName, password, checkInCode, systemCode);
+            if (signUp == 1)
+            {
+                JOptionPane.showMessageDialog(null, "User Name already exists");
+            }
             
-            System.out.println("Name: " + name + " - " + "UserName: " + userName + " - " + "Password: " + password + " - " + "SystemCode: " + systemCode + " - " + "CheckInCode: " + checkInCode);
-            JOptionPane.showMessageDialog(null, "Register Success");
-            
-            displayMain();
+            else 
+            {
+                JOptionPane.showMessageDialog(null, "Register Success");
+                frame.dispose();
+                displayMain();
+            }
         });
 
         // Display
@@ -406,6 +438,16 @@ public class App2UI extends GuiUtil
     //============================================Test============================================
     public static void main(String[] args) 
     {
+        new IdDb().createIdTable();
+        new UserNameDb().createUserNameTable();
+        new ShopDb().createShopTable();
+        new CustomerDb().createCustomerTable();
+        new StaffDb().createStaffTable();
+        new ManagerDb().createManagerTable();
+        new ItemDb().createItemTable();
+        new RequestedItemDb().createRequestedItemTable();
+        new CustomerRequestDb().createCustomerRequestTable();
+
         new App2UI();
     }
 }

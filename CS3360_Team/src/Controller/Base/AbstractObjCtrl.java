@@ -1,8 +1,8 @@
 package Controller.Base;
 
-import Obj.Base.BaseObj;
+import Obj.Base.AbstractObj;
 
-public abstract class AbstractObjCtrl extends BaseObj
+public abstract class AbstractObjCtrl extends AbstractObj
 {
     //========================================Constructor=========================================
     public AbstractObjCtrl() {}

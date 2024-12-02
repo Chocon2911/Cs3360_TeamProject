@@ -1,6 +1,6 @@
 package UI.App2;
 
-import Controller.Main.ShopCtrl;
+import Controller.Child.ShopCtrl;
 import Util.GuiUtil;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -20,9 +20,9 @@ public class ShopUI extends GuiUtil
         this.displayMain();
     }
 
-    public ShopUI(ShopCtrl shopCtrl)
+    public ShopUI(String id)
     {
-        this.shopCtrl = shopCtrl;
+        this.shopCtrl = new ShopCtrl(id);
         this.displayMain();
     }
 
@@ -103,8 +103,8 @@ public class ShopUI extends GuiUtil
     {
         // ===Frame===
         JFrame frame = new JFrame("App2.Shop.Main.Information");
-        frame.setSize(frameWidth, frameHeight);
-        frame.setResizable(false);
+        frame.setSize(600, 700);
+        frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
 
@@ -128,14 +128,23 @@ public class ShopUI extends GuiUtil
 
 
         
-        // ===Back Button===
-        JButton backButton = this.createButton("Back", smallButtonWidth, smallButtonHeight);
+        // ===Back Panel===
+        // Back Panel
+        JPanel backPanel = new JPanel();
+        backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.Y_AXIS));
+
+        // Back Button
+        JButton backButton = this.createButton("Back", smallButtonWidth, bigButtonHeight);
         backButton.setAlignmentY(Component.TOP_ALIGNMENT);
         backButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
             displayMain();
         });
+
+        // Display
+        backPanel.add(Box.createVerticalStrut(verticalStrut));
+        backPanel.add(backButton);
 
 
 
@@ -147,9 +156,8 @@ public class ShopUI extends GuiUtil
 
 
         // ===Display===
-        frame.add(backButton, BorderLayout.EAST);
-        frame.add(panel, BorderLayout.CENTER);
-        frame.add(scrollPane, BorderLayout.WEST);
+        frame.add(backPanel, BorderLayout.WEST);
+        frame.add(scrollPane, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -253,7 +261,7 @@ public class ShopUI extends GuiUtil
         this.setAlignmentCenter(buttonPanel);
 
         // Back Button
-        JButton backButton = this.createButton("Cancel", bigButtonWidth, bigButtonHeight);
+        JButton backButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(backButton);
         backButton.addActionListener((ActionEvent e) -> 
         {
@@ -262,7 +270,7 @@ public class ShopUI extends GuiUtil
         });
 
         // Create Button
-        JButton createButton = this.createButton("Create", bigButtonWidth, bigButtonHeight);
+        JButton createButton = this.createButton("Create", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(createButton);
         createButton.addActionListener((ActionEvent e) -> 
         {
@@ -278,6 +286,13 @@ public class ShopUI extends GuiUtil
                 this.displayMain();
             }
         });
+
+        // Display
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(backButton);
+        buttonPanel.add(Box.createHorizontalStrut(this.horizontalStrut));
+        buttonPanel.add(createButton);
+        buttonPanel.add(Box.createHorizontalGlue());
 
         
         
@@ -352,7 +367,7 @@ public class ShopUI extends GuiUtil
         this.setAlignmentCenter(buttonPanel);
 
         // Cancel Button
-        JButton cancelButton = this.createButton("Cancel", bigButtonWidth, bigButtonHeight);
+        JButton cancelButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
@@ -361,11 +376,13 @@ public class ShopUI extends GuiUtil
         });
 
         // Apply Button
-        JButton createButton = this.createButton("Apply", bigButtonWidth, bigButtonHeight);
+        JButton createButton = this.createButton("Apply", smallButtonWidth, smallButtonHeight);
         this.setAlignmentCenter(createButton);
         createButton.addActionListener((ActionEvent e) -> 
         {
-            this.shopCtrl.changeCheckInCode(checkInField.getText());
+            String checkInCode = checkInField.getText();
+
+            this.shopCtrl.changeCheckInCode(checkInCode);
             JOptionPane.showMessageDialog(null, "Change CheckIn Code Success");
             frame.dispose();
             displayMain();
@@ -396,7 +413,7 @@ public class ShopUI extends GuiUtil
     //==========================================Quit UI===========================================
     private void displayQuit()
     {
-        
+        new App2UI();
     }
 
     //============================================Test============================================
