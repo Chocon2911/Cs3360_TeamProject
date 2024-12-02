@@ -12,6 +12,9 @@ public class App2Ctrl extends ObjUtil
         Shop shop = new ShopDb().queryShopByUserName(userName);
         if (shop == null) return 1; // UserName Not Found
         else if (!shop.getPassword().equals(password)) return 2; // Password Wrong
+        
+        shop.setIsLogin(true);
+        new ShopDb().updateShopData(shop);
         return 0;
     }
 
@@ -24,7 +27,7 @@ public class App2Ctrl extends ObjUtil
     public int signUp(String name, String userName, String password, String checkInCode, String systemCode)
     {
         String shopId = this.getRandomStr(10);
-        Shop shop = new Shop(shopId, name, userName, password, systemCode, checkInCode, null, null, null, null, null);
+        Shop shop = new Shop(shopId, name, userName, password, false, systemCode, checkInCode, null, null, null, null, null);
 
         String e = new ShopDb().insertShopData(shop);
         if (e == null) return 0;

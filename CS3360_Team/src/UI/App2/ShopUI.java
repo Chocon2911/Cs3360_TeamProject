@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 public class ShopUI extends GuiUtil
@@ -33,7 +35,7 @@ public class ShopUI extends GuiUtil
         JFrame frame = new JFrame("App2.Shop.Main");
         frame.setSize(frameWidth, frameHeight);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultWindowClose(frame);
 
         // Main Panel
         JPanel panel = new JPanel();
@@ -105,7 +107,7 @@ public class ShopUI extends GuiUtil
         JFrame frame = new JFrame("App2.Shop.Main.Information");
         frame.setSize(600, 700);
         frame.setResizable(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultWindowClose(frame);
         frame.setLayout(new BorderLayout());
 
 
@@ -168,7 +170,7 @@ public class ShopUI extends GuiUtil
         JFrame frame = new JFrame("App2.Shop.Main.CreateManager");
         frame.setSize(frameWidth, frameHeight);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultWindowClose(frame);
 
 
 
@@ -320,7 +322,7 @@ public class ShopUI extends GuiUtil
         JFrame frame = new JFrame("App2.Shop.Main.ChangeCheckInCode");
         frame.setSize(frameWidth, frameHeight);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultWindowClose(frame);
 
 
 
@@ -413,7 +415,22 @@ public class ShopUI extends GuiUtil
     //==========================================Quit UI===========================================
     private void displayQuit()
     {
+        shopCtrl.logOut();
         new App2UI();
+    }
+
+    //===========================================Other============================================
+    private void setDefaultWindowClose(JFrame frame)
+    {
+        frame.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                shopCtrl.logOut();
+                System.exit(0);
+            }
+        });
     }
 
     //============================================Test============================================

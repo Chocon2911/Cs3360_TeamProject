@@ -19,6 +19,7 @@ public class StaffDb extends AbstractDb
                 + "Name TEXT, "
                 + "UserName TEXT UNIQUE, "
                 + "Password TEXT, "
+                + "IsLogin INTEGER, "
                 + "ShopId TEXT, "
                 + "FOREIGN KEY (Id) REFERENCES ids (GlobalId), "
                 + "FOREIGN KEY (UserName) REFERENCES userNames (GlobalUserName)"
@@ -31,8 +32,8 @@ public class StaffDb extends AbstractDb
     public String insertStaffData(Staff staff)
     {
         String sql = "INSERT INTO Staffs "
-                + "(Id, Name, UserName, Password, ShopId) "
-                + "VALUES (?, ?, ?, ?, ?)";
+                + "(Id, Name, UserName, Password, IsLogin, ShopId) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         List<DbData> data = this.getDataFromStaff(staff);
 
@@ -105,7 +106,7 @@ public class StaffDb extends AbstractDb
     {
         String sql = """
             UPDATE Staffs SET
-            Name = ?, UserName = ?, Password = ?, ShopId = ?
+            Name = ?, UserName = ?, Password = ?, IsLogin = ?, ShopId = ?
             WHERE Id = ?
         """;
 
@@ -142,6 +143,7 @@ public class StaffDb extends AbstractDb
         rowNames.add("Name");
         rowNames.add("UserName");
         rowNames.add("Password");
+        rowNames.add("IsLogin");
         rowNames.add("ShopId");
 
         return rowNames;
@@ -154,6 +156,7 @@ public class StaffDb extends AbstractDb
         rowTypes.add(DbType.TEXT);    // Name
         rowTypes.add(DbType.TEXT);    // UserName
         rowTypes.add(DbType.TEXT);    // Password
+        rowTypes.add(DbType.INTEGER); // IsLogin
         rowTypes.add(DbType.TEXT);    // ShopId
 
         return rowTypes;
@@ -165,9 +168,10 @@ public class StaffDb extends AbstractDb
         String name = data.get(1).getValueStr();
         String userName = data.get(2).getValueStr();
         String password = data.get(3).getValueStr();
-        // String shopId = data.get(4).getValueStr();
+        boolean isLogin = data.get(4).getValueInt() == 1;
+        // String shopId = data.get(5).getValueStr();
 
-        return new Staff(id, name, userName, password);
+        return new Staff(id, name, userName, password, isLogin);
     }
 
     // ===Update - Insert===
@@ -177,6 +181,7 @@ public class StaffDb extends AbstractDb
         DbData name = new DbData(staff.getName());
         DbData userName = new DbData(staff.getUserName());
         DbData password = new DbData(staff.getPassword());
+        DbData isLogin = new DbData(staff.getIsLogin() ? 1 : 0);
         DbData shopId = new DbData(staff.getShop().getId());
 
         List<DbData> data = new ArrayList<>();
@@ -184,6 +189,7 @@ public class StaffDb extends AbstractDb
         data.add(name);
         data.add(userName);
         data.add(password);
+        data.add(isLogin);
         data.add(shopId);
 
         return data;

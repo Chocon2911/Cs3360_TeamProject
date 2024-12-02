@@ -363,7 +363,7 @@ public class ShopCtrl extends AbstractObjCtrl
     {
         String managerId = this.getRandomStr(10);
         Shop shop = this.queryInfo();
-        Manager insertManager = new Manager(managerId, name, userName, password, shop);
+        Manager insertManager = new Manager(managerId, name, userName, password, false, shop);
 
         String e = new ManagerDb().insertManagerData(insertManager);
         if (e == null) return 0;
@@ -387,6 +387,18 @@ public class ShopCtrl extends AbstractObjCtrl
         Shop updateShop = this.queryInfo();
         updateShop.setCheckInCode(checkInCode);
         this.updateInfo(updateShop); 
+    }
+
+
+
+    //============================================================================================
+    //==========================================Log Out===========================================
+    //============================================================================================
+    public void logOut()
+    {
+        Shop shop = this.queryInfo();
+        shop.setIsLogin(false);
+        this.updateInfo(shop);
     }
 
     

@@ -15,6 +15,7 @@ public class CustomerDb extends AbstractDb
                 + "Name TEXT, "
                 + "UserName TEXT UNIQUE, "
                 + "Password TEXT, "
+                + "IsLogin INTEGER, "
                 + "Balance FLOAT, "
                 + "ShopId TEXT, "
                 + "FOREIGN KEY (Id) REFERENCES ids (GlobalId), "
@@ -28,8 +29,8 @@ public class CustomerDb extends AbstractDb
     public String insertCustomerData(Customer customer)
     {
         String sql = "INSERT INTO Customers "
-                + "(Id, Name, UserName, Password, Balance, ShopId) "
-                + "VALUES(?, ?, ?, ?, ?, ?)";
+                + "(Id, Name, UserName, Password, IsLogin, Balance, ShopId) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
         List<DbData> data = this.getDataFromCustomer(customer);
 
@@ -113,7 +114,7 @@ public class CustomerDb extends AbstractDb
     {
         String sql = """
             UPDATE Customers SET 
-            Name = ?, UserName = ?, Password = ?, Balance = ?, ShopId = ?
+            Name = ?, UserName = ?, Password = ?, IsLogin = ?, Balance = ?, ShopId = ?
             WHERE Id = ?
         """;
 
@@ -151,6 +152,7 @@ public class CustomerDb extends AbstractDb
         rowNames.add("Name");
         rowNames.add("UserName");
         rowNames.add("Password");
+        rowNames.add("IsLogin");
         rowNames.add("Balance");
         rowNames.add("ShopId");
         return rowNames;
@@ -163,6 +165,7 @@ public class CustomerDb extends AbstractDb
         rowTypes.add(DbType.TEXT);    // Name
         rowTypes.add(DbType.TEXT);    // UserName
         rowTypes.add(DbType.TEXT);    // Password
+        rowTypes.add(DbType.INTEGER); // IsLogin
         rowTypes.add(DbType.FLOAT);   // Balance
         rowTypes.add(DbType.TEXT);    // ShopId
         return rowTypes;
@@ -174,10 +177,11 @@ public class CustomerDb extends AbstractDb
         String name = data.get(1).getValueStr();
         String userName = data.get(2).getValueStr();
         String password = data.get(3).getValueStr();
-        float balance = data.get(4).getValueFloat();
-        // String shopId = data.get(5).getValueStr();
+        boolean isLogin = data.get(4).getValueInt() == 1;
+        float balance = data.get(5).getValueFloat();
+        // String shopId = data.get(6).getValueStr();
         
-        return new Customer(id, name, userName, password, balance);
+        return new Customer(id, name, userName, password, isLogin, balance);
     }
 
     // ===Update - Insert===
@@ -187,6 +191,7 @@ public class CustomerDb extends AbstractDb
         DbData name = new DbData(customer.getName());
         DbData userName = new DbData(customer.getUserName());
         DbData password = new DbData(customer.getPassword());
+        DbData isLogin = new DbData(customer.getIsLogin() ? 1 : 0);
         DbData balance = new DbData(customer.getBalance());
         DbData shopId = new DbData(customer.getShop().getId());
 
@@ -195,6 +200,7 @@ public class CustomerDb extends AbstractDb
         data.add(name);
         data.add(userName);
         data.add(password);        
+        data.add(isLogin);
         data.add(balance);
         data.add(shopId);
 

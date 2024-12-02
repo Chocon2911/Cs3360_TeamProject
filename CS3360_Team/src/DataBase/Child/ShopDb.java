@@ -16,6 +16,7 @@ public class ShopDb extends AbstractDb
                 + "Name TEXT, "
                 + "UserName TEXT UNIQUE, "
                 + "Password TEXT, "
+                + "IsLogin INTEGER, "
                 + "SystemCode TEXT, "
                 + "CheckInCode TEXT, "
                 + "FOREIGN KEY (Id) REFERENCES ids (GlobalId), "
@@ -29,8 +30,8 @@ public class ShopDb extends AbstractDb
     public String insertShopData(Shop shop)
     {
         String sql = "INSERT INTO Shops" 
-                + "(Id, Name, UserName, Password, SystemCode, CheckInCode) "
-                + "VALUES (?, ?, ?, ?, ?, ?)";
+                + "(Id, Name, UserName, Password, IsLogin, SystemCode, CheckInCode) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         List<DbData> data = this.getDataFromShop(shop);
 
@@ -154,7 +155,7 @@ public class ShopDb extends AbstractDb
     {
         String sql = """
         UPDATE Shops SET 
-        Name = ?, UserName = ?, Password = ?, SystemCode = ?, CheckInCode = ? 
+        Name = ?, UserName = ?, Password = ?, IsLogin = ?, SystemCode = ?, CheckInCode = ? 
         WHERE Id = ?
         """;
         
@@ -192,6 +193,7 @@ public class ShopDb extends AbstractDb
         rowNames.add("Name");
         rowNames.add("UserName");
         rowNames.add("Password");
+        rowNames.add("IsLogin");
         rowNames.add("SystemCode");
         rowNames.add("CheckInCode");
 
@@ -205,6 +207,7 @@ public class ShopDb extends AbstractDb
         rowTypes.add(DbType.TEXT);    // Name
         rowTypes.add(DbType.TEXT);    // UserName
         rowTypes.add(DbType.TEXT);    // Password
+        rowTypes.add(DbType.INTEGER); // IsLogin
         rowTypes.add(DbType.TEXT);    // SystemCode
         rowTypes.add(DbType.TEXT);    // CheckInCode
         
@@ -217,10 +220,11 @@ public class ShopDb extends AbstractDb
         String name = data.get(1).getValueStr();
         String userName = data.get(2).getValueStr();
         String password = data.get(3).getValueStr();
-        String systemCode = data.get(4).getValueStr();
-        String checkInCode = data.get(5).getValueStr();
+        boolean isLogin = data.get(4).getValueInt() == 1;
+        String systemCode = data.get(5).getValueStr();
+        String checkInCode = data.get(6).getValueStr();
 
-        return new Shop(id, name, userName, password, systemCode, checkInCode);
+        return new Shop(id, name, userName, password, isLogin, systemCode, checkInCode);
     }
 
     // ===Upadte - Insert===
@@ -230,6 +234,7 @@ public class ShopDb extends AbstractDb
         DbData name = new DbData(shop.getName());
         DbData userName = new DbData(shop.getUserName());
         DbData password = new DbData(shop.getPassword());
+        DbData isLogin = new DbData(shop.getIsLogin() ? 1 : 0);
         DbData systemCode = new DbData(shop.getSystemCode());
         DbData checkInCode = new DbData(shop.getCheckInCode());
 
@@ -238,6 +243,7 @@ public class ShopDb extends AbstractDb
         data.add(name);
         data.add(userName);
         data.add(password);
+        data.add(isLogin);
         data.add(systemCode);
         data.add(checkInCode);
 
