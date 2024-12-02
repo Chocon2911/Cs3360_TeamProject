@@ -169,7 +169,7 @@ public class ShopUI extends GuiUtil
         // ===Frame===
         JFrame frame = new JFrame("App2.Shop.Main.CreateManager");
         frame.setSize(frameWidth, frameHeight);
-        frame.setResizable(false);
+        frame.setResizable(true);
         this.setDefaultWindowClose(frame);
 
 

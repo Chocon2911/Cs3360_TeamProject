@@ -17,7 +17,6 @@ public class ItemDb extends AbstractDb
                 + "Price FLOAT, "
                 + "InitAmount INTEGER, "
                 + "ItemType INTEGER, "
-                + "Description TEXT, "
                 + "FOREIGN KEY (Id) REFERENCES ids (GlobalId)"
                 + ");";
 
@@ -28,7 +27,7 @@ public class ItemDb extends AbstractDb
     public String insertItemData(Item item)
     {
         String sql = "INSERT INTO Items "
-                + "(Id, Name, ShopId, Price, InitAmount, ItemType, Description) "
+                + "(Id, Name, ShopId, Price, InitAmount, ItemType) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         List<DbData> data = this.getDataFromItem(item);
@@ -99,7 +98,7 @@ public class ItemDb extends AbstractDb
     {
         String sql = """
             UPDATE Items SET 
-            Name = ?, ShopId = ?, Price = ?, InitAmount = ?, ItemType = ?, Description = ?
+            Name = ?, ShopId = ?, Price = ?, InitAmount = ?, ItemType = ?
             WHERE Id = ?
         """;
 
@@ -139,7 +138,6 @@ public class ItemDb extends AbstractDb
         rowNames.add("Price");
         rowNames.add("InitAmount");
         rowNames.add("ItemType");
-        rowNames.add("Description");
 
         return rowNames;
     }
@@ -153,7 +151,6 @@ public class ItemDb extends AbstractDb
         rowTypes.add(DbType.FLOAT);   // Price
         rowTypes.add(DbType.INTEGER); // InitAmount
         rowTypes.add(DbType.INTEGER); // ItemType
-        rowTypes.add(DbType.TEXT);    // Description
 
         return rowTypes;
     }
@@ -166,9 +163,8 @@ public class ItemDb extends AbstractDb
         float price = data.get(3).getValueFloat();
         int initAmount = data.get(4).getValueInt();
         int itemTypeInt = data.get(5).getValueInt();
-        String description = data.get(6).getValueStr();
 
-        return new Item(id, name, price, ItemType.values()[itemTypeInt], initAmount, description);
+        return new Item(id, name, price, ItemType.values()[itemTypeInt], initAmount);
     }
 
     // ===Update - Insert===
@@ -180,7 +176,6 @@ public class ItemDb extends AbstractDb
         DbData price = new DbData(item.getPrice());
         DbData initAmount = new DbData(item.getInitAmount());
         DbData itemType = new DbData(item.getItemType().ordinal());
-        DbData description = new DbData(item.getDescription());
         if (item.getShop() != null)
         {
             shopId = new DbData(item.getShop().getId());
@@ -193,7 +188,6 @@ public class ItemDb extends AbstractDb
         data.add(price);
         data.add(initAmount);
         data.add(itemType);
-        data.add(description);
 
         return data;
     }

@@ -9,6 +9,8 @@ import javax.swing.*;
 public class App1UI extends GuiUtil
 {
     App1Ctrl ctrl;
+
+    //========================================Constructor=========================================
     public App1UI()
     {
         this.ctrl = new App1Ctrl();
