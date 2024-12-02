@@ -176,11 +176,15 @@ public class ItemDb extends AbstractDb
     {
         DbData id = new DbData(item.getId());
         DbData name = new DbData(item.getName());
-        DbData shopId = new DbData(item.getShop().getId());
+        DbData shopId = new DbData("NULL");
         DbData price = new DbData(item.getPrice());
         DbData initAmount = new DbData(item.getInitAmount());
         DbData itemType = new DbData(item.getItemType().ordinal());
         DbData description = new DbData(item.getDescription());
+        if (item.getShop() != null)
+        {
+            shopId = new DbData(item.getShop().getId());
+        }
 
         List<DbData> data = new ArrayList<>();
         data.add(id);

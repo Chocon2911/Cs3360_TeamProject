@@ -171,11 +171,27 @@ public class RequestedItemDb extends AbstractDb
     private List<DbData> getDataFromRequestedItem(RequestedItem requestedItem)
     {
         DbData id = new DbData(requestedItem.getId());
-        DbData shopId = new DbData(requestedItem.getShop().getId());
-        DbData customerRequestId = new DbData(requestedItem.getCustomerRequest().getId());
-        DbData customerId = new DbData(requestedItem.getCustomer().getId());
-        DbData itemId = new DbData(requestedItem.getItem().getId());
+        DbData shopId = new DbData("NULL");
+        DbData customerRequestId = new DbData("NULL");
+        DbData customerId = new DbData("NULL");
+        DbData itemId = new DbData("NULL");
         DbData amount = new DbData(requestedItem.getAmount());
+        if (requestedItem.getShop() != null)
+        {
+            shopId = new DbData(requestedItem.getShop().getId());
+        }
+        if (requestedItem.getCustomerRequest() != null)
+        {
+            customerRequestId = new DbData(requestedItem.getCustomerRequest().getId());
+        }
+        if (requestedItem.getCustomer() != null)
+        {
+            customerId = new DbData(requestedItem.getCustomer().getId());
+        }
+        if (requestedItem.getItem() != null)
+        {
+            itemId = new DbData(requestedItem.getItem().getId());
+        }
 
         List<DbData> data = new ArrayList<>();
         data.add(id);

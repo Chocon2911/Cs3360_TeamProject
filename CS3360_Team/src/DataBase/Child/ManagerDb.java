@@ -187,7 +187,11 @@ public class ManagerDb extends AbstractDb
         DbData userName = new DbData(manager.getUserName());
         DbData password = new DbData(manager.getPassword());
         DbData isLogin = new DbData(manager.getIsLogin() ? 1 : 0);
-        DbData shopId = new DbData(manager.getShop().getId());
+        DbData shopId = new DbData("NULL");
+        if (manager.getShop() != null)
+        {
+            shopId = new DbData(manager.getShop().getId());
+        }
 
         List<DbData> data = new ArrayList<>();
         data.add(id);

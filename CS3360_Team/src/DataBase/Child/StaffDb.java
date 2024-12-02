@@ -192,7 +192,11 @@ public class StaffDb extends AbstractDb
         DbData userName = new DbData(staff.getUserName());
         DbData password = new DbData(staff.getPassword());
         DbData isLogin = new DbData(staff.getIsLogin() ? 1 : 0);
-        DbData shopId = new DbData(staff.getShop().getId());
+        DbData shopId = new DbData("NULL");
+        if (staff.getShop() != null)
+        {
+            shopId = new DbData(staff.getShop().getId());
+        }
 
         List<DbData> data = new ArrayList<>();
         data.add(id);

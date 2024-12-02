@@ -169,10 +169,22 @@ public class CustomerRequestDb extends AbstractDb
     {
         DbData id = new DbData(customerRequest.getId());
         DbData name = new DbData(customerRequest.getName());
-        DbData shopId = new DbData(customerRequest.getShop().getId());
-        DbData requestedCustomerId = new DbData(customerRequest.getRequestedCustomer().getId());
-        DbData handledStaffId = new DbData(customerRequest.getHandledStaff().getId());
+        DbData shopId = new DbData("NULL");
+        DbData requestedCustomerId = new DbData("NULL");
+        DbData handledStaffId = new DbData("NULL");
         DbData isSold = new DbData(customerRequest.getIsSold() ? 1 : 0);
+        if (customerRequest.getShop() != null)
+        {
+            shopId = new DbData(customerRequest.getShop().getId());
+        }
+        if (customerRequest.getRequestedCustomer() != null)
+        {
+            requestedCustomerId = new DbData(customerRequest.getRequestedCustomer().getId());
+        }
+        if (customerRequest.getHandledStaff() != null)
+        {
+            handledStaffId = new DbData(customerRequest.getHandledStaff().getId());
+        }
 
         List<DbData> data = new ArrayList<>();
         data.add(id);

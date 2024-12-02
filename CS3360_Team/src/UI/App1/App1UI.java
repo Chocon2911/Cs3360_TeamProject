@@ -351,6 +351,20 @@ public class App1UI extends GuiUtil
             System.out.println("Name: " + name);
             System.out.println("UserName: " + userName);
             System.out.println("Password: " + password);
+
+            int signUp = this.ctrl.signUp(name, userName, password);
+            if (signUp == 1) 
+            {
+                System.out.println("UserName already exists");
+                JOptionPane.showMessageDialog(null, "Username already exists!");
+            }
+            else 
+            {
+                System.out.println("Sign Up Success!");
+                JOptionPane.showMessageDialog(null, "Sign Up Success!");
+                frame.dispose();
+                displayMain();
+            }
         });
 
         // Display

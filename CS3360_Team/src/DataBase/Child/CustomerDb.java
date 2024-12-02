@@ -63,7 +63,7 @@ public class CustomerDb extends AbstractDb
         Shop shop = new ShopDb().queryShopPriData(shopId);
 
         // CustomerRequests
-        queryValue = "CustomerId";
+        queryValue = "RequestedCustomerId";
         datas = new CustomerRequestDb().queryCustomerRequestRawDatas(queryData, queryValue);
         List<CustomerRequest> customerRequests = new ArrayList<>();
         for (List<DbData> customerRequestData : datas)
@@ -203,7 +203,11 @@ public class CustomerDb extends AbstractDb
         DbData password = new DbData(customer.getPassword());
         DbData isLogin = new DbData(customer.getIsLogin() ? 1 : 0);
         DbData balance = new DbData(customer.getBalance());
-        DbData shopId = new DbData(customer.getShop().getId());
+        DbData shopId = new DbData("NULL");
+        if (customer.getShop() != null)
+        {
+            shopId = new DbData(customer.getShop().getId());
+        }
 
         List<DbData> data = new ArrayList<>();
         data.add(id);
