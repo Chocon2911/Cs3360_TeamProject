@@ -180,7 +180,7 @@ public class App2UI extends GuiUtil
                 System.out.println("Login Success");
                 JOptionPane.showMessageDialog(null, "Login Success");
                 frame.dispose();
-                new ShopUI(ctrl.getIdByUserName(userName));
+                new ShopUI(ctrl.getUserId(userName, password));
             }
 
             else if (login == 1) 
@@ -390,7 +390,10 @@ public class App2UI extends GuiUtil
             {
                 JOptionPane.showMessageDialog(null, "User Name already exists");
             }
-            
+            else if (signUp == 2)
+            {
+                JOptionPane.showMessageDialog(null, "Check In Code already exists");
+            }
             else 
             {
                 JOptionPane.showMessageDialog(null, "Register Success");

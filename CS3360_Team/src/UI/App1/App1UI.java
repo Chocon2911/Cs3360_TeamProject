@@ -141,28 +141,6 @@ public class App1UI extends GuiUtil
 
 
 
-        // ===CheckInCode Panel===
-        // Panel
-        JPanel checkInCodePanel = new JPanel();
-        checkInCodePanel.setLayout(new BoxLayout(checkInCodePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(checkInCodePanel, panelTextFieldWidth, panelTextFieldHeight);
-
-        // CheckInCode Label
-        JLabel checkInCodeLabel = new JLabel("Check In Code:");
-        this.setFixedSize(checkInCodeLabel, normalLabelWidth, normalLabelHeight);
-
-        // CheckInCode Text Field
-        JTextField checkInCodeTextField = new JTextField(textFieldAmount);
-
-        // Display
-        checkInCodePanel.add(Box.createHorizontalGlue());
-        checkInCodePanel.add(checkInCodeLabel);
-        checkInCodePanel.add(Box.createHorizontalStrut(horizontalStrut));
-        checkInCodePanel.add(checkInCodeTextField);
-        checkInCodePanel.add(Box.createHorizontalGlue());
-
-
-
         // ===Button Panel===
         // Panel
         JPanel buttonPanel = new JPanel();
@@ -187,12 +165,47 @@ public class App1UI extends GuiUtil
 
             String userName = userNameTextField.getText();
             String password = String.valueOf(passwordTextField.getPassword());
-            String checkInCode = checkInCodeTextField.getText();
 
             System.out.println("UserName: " + userName);
             System.out.println("Password: " + password);
-            System.out.println("CheckInCode: " + checkInCode);
             
+            int login = ctrl.login(userName, password);
+
+            if (login == 0) // Wrong UserName
+            {
+                JOptionPane.showMessageDialog(null, "Username not found!");
+            }
+            else if (login == 2 || login == 4 || login == 6) // Wrong Password
+            {
+                JOptionPane.showMessageDialog(null, "Wrong Password!");
+            }
+            // True UserName and Password
+            else
+            {
+                System.out.println("Login Success!");
+                JOptionPane.showMessageDialog(null, "Login Success!");
+                frame.dispose();
+
+                if (login == 1) // Login Customer
+                {
+                    System.out.println("Login Customer");
+                    new CustomerUI(this.ctrl.getCustomerId(userName, password));
+                }
+                else if (login == 3) // Login Staff
+                {
+                    System.out.println("Login Staff");
+                    new StaffUI(this.ctrl.getStaffId(userName, password));
+                }
+                else if (login == 5) // Login Manager
+                {
+                    System.out.println("Login Manager");
+                    new ManagerUI(this.ctrl.getManagerId(userName, password));
+                }
+                else
+                {
+                    System.out.println("displayLogin() Error: Login = " + login);
+                }
+            }
         });
 
         // Display
@@ -211,8 +224,6 @@ public class App1UI extends GuiUtil
         panel.add(userNamePanel);
         panel.add(Box.createVerticalStrut(verticalStrut));
         panel.add(passwordPanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
-        panel.add(checkInCodePanel);
         panel.add(Box.createVerticalStrut(verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());

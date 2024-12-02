@@ -18,9 +18,13 @@ public class App2Ctrl extends ObjUtil
         return 0;
     }
 
-    public String getIdByUserName(String userName) 
+    public String getUserId(String userName, String password) 
     { 
-        return new ShopDb().queryShopByUserName(userName).getId(); 
+        Shop shop = new ShopDb().queryShopByUserName(userName);
+        if (shop == null) return null;
+        else if (!shop.getPassword().equals(password)) return null;
+
+        return shop.getId();
     }
 
     //==========================================Sign Up===========================================
@@ -37,6 +41,7 @@ public class App2Ctrl extends ObjUtil
             return this.signUp(name, userName, password, checkInCode, systemCode);
         }
         else if (e.contains("Shops.UserName")) return 1;
+        else if (e.contains("Shops.CheckInCode")) return 2;
 
         return 0;
     }

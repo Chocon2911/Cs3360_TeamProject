@@ -18,7 +18,7 @@ public class ShopDb extends AbstractDb
                 + "Password TEXT, "
                 + "IsLogin INTEGER, "
                 + "SystemCode TEXT, "
-                + "CheckInCode TEXT, "
+                + "CheckInCode TEXT UNIQUE, "
                 + "FOREIGN KEY (Id) REFERENCES ids (GlobalId), "
                 + "FOREIGN KEY (UserName) REFERENCES userNames (GlobalUserName)"
                 + ");";
@@ -123,6 +123,16 @@ public class ShopDb extends AbstractDb
     {
         DbData queryData = new DbData(userName);
         String queryValue = "UserName";
+        List<List<DbData>> datas = this.queryShopRawDatas(queryData, queryValue);
+        if (datas.isEmpty()) return null;
+
+        return this.queryShopData(datas.get(0).get(0).getValueStr());
+    }
+
+    public Shop queryShopByCheckInCode(String checkInCode)
+    {
+        DbData queryData = new DbData(checkInCode);
+        String queryValue = "CheckInCode";
         List<List<DbData>> datas = this.queryShopRawDatas(queryData, queryValue);
         if (datas.isEmpty()) return null;
 

@@ -384,10 +384,17 @@ public class ShopUI extends GuiUtil
         {
             String checkInCode = checkInField.getText();
 
-            this.shopCtrl.changeCheckInCode(checkInCode);
-            JOptionPane.showMessageDialog(null, "Change CheckIn Code Success");
-            frame.dispose();
-            displayMain();
+            int changeCheckInCode = this.shopCtrl.changeCheckInCode(checkInCode);
+            if (changeCheckInCode == 1)
+            {
+                JOptionPane.showMessageDialog(null, "CheckIn Code is already exist");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Change CheckIn Code Success");
+                frame.dispose();
+                displayMain();
+            }
         });
         
         // Display

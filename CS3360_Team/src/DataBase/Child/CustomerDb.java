@@ -88,6 +88,16 @@ public class CustomerDb extends AbstractDb
         return customer;
     }
 
+    public Customer queryCustomerByUserName(String userName)
+    {
+        DbData queryData = new DbData(userName);
+        String queryValue = "UserName";
+        List<List<DbData>> datas = this.queryCustomerRawDatas(queryData, queryValue);
+        if (datas.isEmpty()) return null;
+
+        return this.queryCustomerData(datas.get(0).get(0).getValueStr());
+    }
+
     // Private Info
     public Customer queryCustomerPriData(String id)
     {

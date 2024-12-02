@@ -58,8 +58,6 @@ public class ShopCtrl extends AbstractObjCtrl
         return mainPanel;
     }
 
-
-
     //========================================Private Info========================================
     private JPanel displayPrivateInfo()
     {
@@ -382,11 +380,16 @@ public class ShopCtrl extends AbstractObjCtrl
     //============================================================================================
     //====================================Change Check In Code====================================
     //============================================================================================
-    public void changeCheckInCode(String checkInCode) 
+    public int changeCheckInCode(String checkInCode) 
     { 
+        Shop shop = new ShopDb().queryShopByCheckInCode(checkInCode);
+        if (shop != null) return 1;
+
         Shop updateShop = this.queryInfo();
         updateShop.setCheckInCode(checkInCode);
-        this.updateInfo(updateShop); 
+        this.updateInfo(updateShop);
+        
+        return 0;
     }
 
 

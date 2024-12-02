@@ -80,6 +80,16 @@ public class StaffDb extends AbstractDb
         return staff;
     }
 
+    public Staff queryStaffByUserName(String userName)
+    {
+        DbData queryData = new DbData(userName);
+        String queryValue = "UserName";
+        List<List<DbData>> datas = this.queryStaffRawDatas(queryData, queryValue);
+        if (datas.isEmpty()) return null;
+
+        return this.queryStaffData(datas.get(0).get(0).getValueStr());
+    }
+
     // Private Info
     public Staff queryStaffPriData(String id)
     {
