@@ -325,7 +325,66 @@ public class ManagerUI extends GuiUtil
     //=======================================CreateStaff UI=======================================
     private void displayCreateStaff()
     {
+        // ===Frame===
+        JFrame frame = new JFrame("Manager.CreateStaff");
+        frame.setSize(frameWidth, frameHeight);
+        frame.setResizable(true);
+        this.setDefaultWindowClose(frame);
+
+        // ===Panel===
+        JPanel panel = this.getMainPanel();
+
+        JLabel titleLabel = this.getTitleLabel("Create Staff");
+        JPanel namePanel = this.getTextPanel("Name:");
+        JPanel userNamePanel = this.getTextPanel("User Name:");
+        JPanel passwordPanel = this.getPasswordPanel("Password:");
+
+        // ===Button Panel===
+        // Panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        this.setAlignmentCenter(buttonPanel);
+
+        // Cancel Button
+        JButton cancelButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
+        this.setAlignmentCenter(cancelButton);
+        cancelButton.addActionListener((ActionEvent e) -> 
+        {
+            frame.dispose();
+            displayMain();
+        });
+
+        // Create Button
+        JButton createButton = this.createButton("Create", smallButtonWidth, smallButtonHeight);
+        this.setAlignmentCenter(createButton);
+        createButton.addActionListener((ActionEvent e) -> 
+        {
+            
+        });
         
+        // Display
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(cancelButton);
+        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(createButton);
+        buttonPanel.add(Box.createHorizontalGlue());
+
+
+        // ===Display===
+        panel.add(Box.createVerticalGlue());
+        panel.add(titleLabel);
+        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(namePanel);
+        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(userNamePanel);
+        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(passwordPanel);
+        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(buttonPanel);
+        panel.add(Box.createVerticalGlue());
+        
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
     //=======================================DeleteStaff UI=======================================

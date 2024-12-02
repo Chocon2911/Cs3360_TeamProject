@@ -71,4 +71,73 @@ public abstract class GuiUtil
         this.setFixedSize(button, width, height);
         return button;
     }
+
+    //===========================================Panel============================================
+    protected JPanel getMainPanel()
+    {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        return panel;
+    }
+
+    //===========================================Field============================================
+    protected JPanel getTextPanel(String name)
+    {
+        // Panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        this.setFixedSize(panel, panelTextFieldWidth, panelTextFieldHeight);
+
+        // Label
+        JLabel nameLabel = new JLabel(name);
+        this.setAlignmentCenter(nameLabel);
+        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+
+        // TextField
+        JTextField textField = new JTextField(this.textFieldAmount);
+
+        // Display
+        panel.add(Box.createHorizontalGlue());
+        panel.add(nameLabel);
+        panel.add(Box.createHorizontalStrut(horizontalStrut));
+        panel.add(textField);
+        panel.add(Box.createHorizontalGlue());
+
+        return panel;
+    }
+
+    protected JPanel getPasswordPanel(String name)
+    {
+        // Panel
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        this.setFixedSize(panel, panelTextFieldWidth, panelTextFieldHeight);
+
+        // Label
+        JLabel nameLabel = new JLabel(name);
+        this.setAlignmentCenter(nameLabel);
+        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+
+        // TextField
+        JPasswordField textField = new JPasswordField(this.textFieldAmount);
+
+        // Display
+        panel.add(Box.createHorizontalGlue());
+        panel.add(nameLabel);
+        panel.add(Box.createHorizontalStrut(horizontalStrut));
+        panel.add(textField);
+        panel.add(Box.createHorizontalGlue());
+
+        return panel;
+    }
+
+    //===========================================Title============================================
+    protected JLabel getTitleLabel(String name)
+    {
+        JLabel titleLabel = new JLabel(name);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
+        this.setAlignmentCenter(titleLabel);
+        return titleLabel;
+    }
 }
