@@ -13,8 +13,6 @@ public class App2Ctrl
         if (shop == null) return 1; // UserName Not Found
         else if (!shop.getPassword().equals(password)) return 2; // Password Wrong
         
-        shop.setIsLogin(true);
-        new ShopDb().updateShopData(shop);
         return 0;
     }
 

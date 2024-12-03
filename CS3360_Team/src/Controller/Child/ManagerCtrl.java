@@ -74,7 +74,6 @@ public class ManagerCtrl extends AbstractObjCtrl
         }
 
         // Display
-        mainPanel.add(Box.createVerticalGlue());
         mainPanel.add(idLabel);
         mainPanel.add(Box.createVerticalStrut(GuiUtil.getInstance().verticalStrut));
         mainPanel.add(nameLabel);
@@ -84,7 +83,6 @@ public class ManagerCtrl extends AbstractObjCtrl
         mainPanel.add(passwordLabel);
         mainPanel.add(Box.createVerticalStrut(GuiUtil.getInstance().verticalStrut));
         mainPanel.add(shopNameLabel);
-        mainPanel.add(Box.createVerticalGlue());
 
         return mainPanel;
     }
@@ -147,8 +145,13 @@ public class ManagerCtrl extends AbstractObjCtrl
         String staffId = ObjUtil.getInstance().getRandomStr(10);
         Staff staff = new Staff(staffId, name, userName, password, false);
         String e = StaffDb.getInstance().insertStaffData(staff);
-        if (e.contains("Staffs.Id")) return 1; // Id Already exists
-        else if (e.contains("Staffs.UserName")) return 2; // UserName is already exist
+        if (e == null) return 0; // Create Successfully
+        else if (e.contains("Staffs.Id")) // Id Already exists
+        {
+            System.out.println("Error: Id already exists");
+            return createStaff(name, userName, password);
+        }
+        else if (e.contains("Staffs.UserName")) return 1; // UserName is already exist
 
         return 0; // Create Successfully
     }
@@ -176,7 +179,7 @@ public class ManagerCtrl extends AbstractObjCtrl
             return 1;
         }
         
-        boolean delete = StaffDb.getInstance().deleteStaffData(staff.getId());
+        boolean delete = StaffDb.getInstance().deleteStaffData(staff.getId(), staff.getUserName());
         if (!delete)
         {
             System.out.println("deleteStaff(): Can't Delete Staff with Id: " + staff.getId());
@@ -206,12 +209,47 @@ public class ManagerCtrl extends AbstractObjCtrl
         String itemId = ObjUtil.getInstance().getRandomStr(10);
         Item item = new Item(itemId, name, price, itemType, initAmount);
         String e = ItemDb.getInstance().insertItemData(item);
-        if (e.contains("Items.Id")) // Id already exists
+        if (e == null) return 0; // Add Successfully
+        else if (e.contains("Items.Id")) // Id already exists
         {
             System.out.println("addItem(): Id already exists: " + itemId);
-            return 3;
+            return addItem(name, price, initAmount, itemType);
         }        
 
         return 0; // Add Successfully
+    }
+
+
+
+    //============================================================================================
+    //===========================================Other============================================
+    //============================================================================================
+    public boolean login()
+    {
+        Manager manager = this.queryInfo();
+        if (manager == null)
+        {
+            System.out.println("login(): Error: Manager not found");
+            return false;
+        }
+
+        manager.setIsLogin(true);
+        this.updateInfo(manager);
+        return true;
+    }
+
+    public boolean logout()
+    {
+        Manager manager = this.queryInfo();
+        if (manager == null)
+        {
+            System.out.println("logout(): Error: Manager not found");
+            return false;
+        }
+
+        manager.setIsLogin(false);
+        manager.setShop(null);
+        this.updateInfo(manager);
+        return true;
     }
 }

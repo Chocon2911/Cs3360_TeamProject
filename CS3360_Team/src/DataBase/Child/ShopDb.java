@@ -190,7 +190,7 @@ public class ShopDb extends AbstractDb
     }
 
     //===========================================Delete===========================================
-    public boolean deleteManagerData(String id)
+    public boolean deleteManagerData(String id, String userName)
     {
         String sql = "DELETE FROM Shops WHERE Id = ?";
         DbData idDb = new DbData();

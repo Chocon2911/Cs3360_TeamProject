@@ -40,7 +40,7 @@ public class IdDb extends AbstractDb
     //===========================================Delete===========================================
     public boolean deleteId(String id)
     {
-        String sql = "DELETE FROM ids WHERE UserName = ?";
+        String sql = "DELETE FROM ids WHERE GlobalId = ?";
         DbData userNameData = new DbData(id);
         return this.deleteRow(url, sql, userNameData);
     }

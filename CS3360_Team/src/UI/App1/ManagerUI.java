@@ -1,8 +1,11 @@
 package UI.App1;
 
 import Controller.Child.ManagerCtrl;
+import Obj.Data.ItemType;
 import Util.GuiUtil;
+import Util.ObjUtil;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -24,6 +27,11 @@ public class ManagerUI
     public ManagerUI(String id)
     {
         this.ctrl = new ManagerCtrl(id);
+        if (!ctrl.login())
+        {
+            System.out.println("Login failed");
+            System.exit(0);
+        }
         this.displayPreMain();
     }
 
@@ -114,6 +122,7 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(infoButton);
         infoButton.addActionListener((ActionEvent e) -> 
         {
+            System.out.println("//========================================Information=========================================");
             frame.dispose();
             displayInfo();
         });
@@ -309,6 +318,8 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(joinButton);
         joinButton.addActionListener((ActionEvent e) -> 
         {
+            System.out.println("//=========================================Join Shop==========================================");
+
             String checkInCode = checkInCodeTextField.getText();
 
             int joinShop = ctrl.joinShop(checkInCode);
@@ -366,10 +377,77 @@ public class ManagerUI
         // ===Panel===
         JPanel panel = guiUtil.getMainPanel();
 
+        // ===Title===
         JLabel titleLabel = guiUtil.getTitleLabel("Create Staff");
-        JPanel namePanel = guiUtil.getTextPanel("Name:");
-        JPanel userNamePanel = guiUtil.getTextPanel("User Name:");
-        JPanel passwordPanel = guiUtil.getPasswordPanel("Password:");
+
+        // ===Name Panel===
+        // Panel
+        JPanel namePanel = new JPanel();
+        namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
+        guiUtil.setFixedSize(namePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
+
+        // Label
+        JLabel nameLabel = new JLabel("Name:");
+        guiUtil.setAlignmentCenter(nameLabel);
+        guiUtil.setFixedSize(nameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
+
+        // TextField
+        JTextField nameTextField = new JTextField(guiUtil.textFieldAmount);
+
+        // Display
+        namePanel.add(Box.createHorizontalGlue());
+        namePanel.add(nameLabel);
+        namePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
+        namePanel.add(nameTextField);
+        namePanel.add(Box.createHorizontalGlue());
+
+
+
+        // ===User Name Panel===
+        // Panel
+        JPanel userNamePanel = new JPanel();
+        userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.X_AXIS));
+        guiUtil.setFixedSize(userNamePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
+
+        // Label
+        JLabel userNameLabel = new JLabel("User Name:");
+        guiUtil.setAlignmentCenter(userNameLabel);
+        guiUtil.setFixedSize(userNameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
+
+        // TextField
+        JTextField userNameTextField = new JTextField(guiUtil.textFieldAmount);
+
+        // Display
+        userNamePanel.add(Box.createHorizontalGlue());
+        userNamePanel.add(userNameLabel);
+        userNamePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
+        userNamePanel.add(userNameTextField);
+        userNamePanel.add(Box.createHorizontalGlue());
+
+
+
+        // ===Password Panel===
+        // Panel
+        JPanel passwordPanel = new JPanel();
+        passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
+        guiUtil.setFixedSize(passwordPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
+
+        // Label
+        JLabel passwordLabel = new JLabel("Password:");
+        guiUtil.setAlignmentCenter(passwordLabel);
+        guiUtil.setFixedSize(passwordLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
+
+        // TextField
+        JPasswordField passwordTextField = new JPasswordField(guiUtil.textFieldAmount);
+
+        // Display        
+        passwordPanel.add(Box.createHorizontalGlue());
+        passwordPanel.add(passwordLabel);
+        passwordPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
+        passwordPanel.add(passwordTextField);
+        passwordPanel.add(Box.createHorizontalGlue());
+
+
 
         // ===Button Panel===
         // Panel
@@ -391,7 +469,23 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(createButton);
         createButton.addActionListener((ActionEvent e) -> 
         {
-            
+            System.out.println("//========================================Create Staff========================================");
+
+            String name = nameTextField.getText();
+            String userName = userNameTextField.getText();
+            String password = String.valueOf(passwordTextField.getPassword());
+
+            int createStaff = ctrl.createStaff(name, userName, password);
+            if (createStaff == 1) // UserName is already exist
+            {
+                JOptionPane.showMessageDialog(null, "User Name is already exist");
+            }
+            else if (createStaff == 0) // Create Successfully
+            {
+                JOptionPane.showMessageDialog(null, "Create Staff Successfully");
+                frame.dispose();
+                displayMain();
+            }
         });
         
         // Display
@@ -445,26 +539,26 @@ public class ManagerUI
 
 
 
-        // ===Id Panel===
+        // ===UserName Panel===
         // Panel
-        JPanel idPanel = new JPanel();
-        idPanel.setLayout(new BoxLayout(idPanel, BoxLayout.X_AXIS));
-        guiUtil.setFixedSize(idPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
+        JPanel userNamePanel = new JPanel();
+        userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.X_AXIS));
+        guiUtil.setFixedSize(userNamePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
-        JLabel idLabel = new JLabel("Id:");
-        guiUtil.setAlignmentCenter(idLabel);
-        guiUtil.setFixedSize(idLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
+        JLabel userNameLabel = new JLabel("User Name:");
+        guiUtil.setAlignmentCenter(userNameLabel);
+        guiUtil.setFixedSize(userNameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // TextField
-        JTextField idTextField = new JTextField(guiUtil.textFieldAmount);
+        JTextField userNameTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
-        idPanel.add(Box.createHorizontalGlue());
-        idPanel.add(idLabel);
-        idPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
-        idPanel.add(idTextField);
-        idPanel.add(Box.createHorizontalGlue());
+        userNamePanel.add(Box.createHorizontalGlue());
+        userNamePanel.add(userNameLabel);
+        userNamePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
+        userNamePanel.add(userNameTextField);
+        userNamePanel.add(Box.createHorizontalGlue());
 
 
 
@@ -479,7 +573,8 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
-            
+            frame.dispose();
+            displayMain();
         });
 
         // Delete Button
@@ -487,7 +582,20 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(deleteButton);
         deleteButton.addActionListener((ActionEvent e) -> 
         {
-            
+            System.out.println("//========================================Delete Staff========================================");
+            String userName = userNameTextField.getText();
+
+            int deleteStaff = ctrl.deleteStaff(userName);
+            if (deleteStaff == 1) // UserName is not exist
+            {
+                JOptionPane.showMessageDialog(null, "User Name is not exist");
+            }
+            else if (deleteStaff == 0) // Delete Successfully
+            {
+                JOptionPane.showMessageDialog(null, "Delete Staff Successfully");
+                frame.dispose();
+                displayMain();
+            }
         });
 
         // Display
@@ -503,7 +611,7 @@ public class ManagerUI
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
         panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
-        panel.add(idPanel);
+        panel.add(userNamePanel);
         panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
@@ -522,8 +630,6 @@ public class ManagerUI
         frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         this.setDefaultWindowClose(frame);
-
-        
         
         // ===Panel===
         JPanel panel = new JPanel();
@@ -533,9 +639,6 @@ public class ManagerUI
         JLabel titleLabel = new JLabel("Add Item");
         titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
         guiUtil.setAlignmentCenter(titleLabel);
-
-
-
 
         // ===Name Panel===
         // Panel
@@ -587,7 +690,7 @@ public class ManagerUI
         // Panel
         JPanel itemTypePanel = new JPanel();
         itemTypePanel.setLayout(new BoxLayout(itemTypePanel, BoxLayout.X_AXIS));
-        guiUtil.setFixedSize(itemTypePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
+        guiUtil.setFixedSize(itemTypePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight / 4 * 9);
 
         // Label
         JLabel itemTypeLabel = new JLabel("ItemType:");
@@ -595,8 +698,21 @@ public class ManagerUI
         guiUtil.setFixedSize(itemTypeLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // JList
+        String[] itemTypesStr = {"Food", "Cloth", "Tool"};
+        JList<String> itemTypeStrJList = new JList<>(itemTypesStr);
+        itemTypeStrJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Set the selection mode to single selection
+        itemTypeStrJList.setSelectedIndex(0);
+        guiUtil.setFixedSize(itemTypeStrJList, 178, guiUtil.smallLabelHeight * 3);
+        itemTypeStrJList.setBorder(BorderFactory.createLineBorder(Color.gray));
 
         // Display
+        itemTypePanel.add(Box.createHorizontalGlue());
+        itemTypePanel.add(itemTypeLabel);
+        itemTypePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
+        itemTypePanel.add(itemTypeStrJList);
+        itemTypePanel.add(Box.createHorizontalGlue());
+
+
 
         // ===Amount Panel===
         // Panel
@@ -632,7 +748,8 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
-            
+            frame.dispose();
+            displayMain();
         });
 
         // Add Button
@@ -640,7 +757,39 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(addButton);
         addButton.addActionListener((ActionEvent e) -> 
         {
-            
+            System.out.println("//==========================================Add Item==========================================");
+
+            String name = nameTextField.getText();
+            String priceStr = priceTextField.getText();
+            String itemTypeStr = itemTypeStrJList.getSelectedValue();
+            String amountStr = amountTextField.getText();
+
+            ItemType itemType = ObjUtil.getInstance().getItemTypeFromStr(itemTypeStr);
+            try
+            {
+                float price = Float.parseFloat(priceStr);
+                int amount = Integer.parseInt(amountStr);
+
+                int addItem = ctrl.addItem(name, price, amount, itemType);
+                if (addItem == 1) // Price is too low
+                {
+                    JOptionPane.showMessageDialog(null, "Price is too low");
+                }
+                else if (addItem == 2) // Amount is too low
+                {
+                    JOptionPane.showMessageDialog(null, "Amount is too low");
+                }
+                else if (addItem == 0)
+                {
+                    JOptionPane.showMessageDialog(null, "Item added successfully");
+                    frame.dispose();
+                    displayMain();
+                }
+            }
+            catch (NumberFormatException ex)
+            {
+                JOptionPane.showMessageDialog(null, "Amount and Price must be numbers");
+            }
         });
 
         // Display
@@ -674,7 +823,7 @@ public class ManagerUI
     //==========================================Quit UI===========================================
     private void displayQuit()
     {
-        
+        ctrl.logout();
     }
 
     //===========================================Other============================================
@@ -685,7 +834,10 @@ public class ManagerUI
             @Override
             public void windowClosing(WindowEvent e)
             {
-                // ctrl.logOut();
+                if (!ctrl.logout())
+                {
+                    System.out.println("Log out failed");
+                }
                 System.exit(0);
             }
         });

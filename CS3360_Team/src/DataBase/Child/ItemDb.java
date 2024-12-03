@@ -38,7 +38,7 @@ public class ItemDb extends AbstractDb
     {
         String sql = "INSERT INTO Items "
                 + "(Id, Name, ShopId, Price, InitAmount, ItemType) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         List<DbData> data = this.getDataFromItem(item);
 

@@ -25,6 +25,12 @@ public class ShopUI
     public ShopUI(String id)
     {
         this.shopCtrl = new ShopCtrl(id);
+        if (!this.shopCtrl.login())
+        {
+            System.out.println("ShopUI(): Error: Login failed");
+            return;
+        }
+
         this.displayMain();
     }
 
@@ -430,7 +436,7 @@ public class ShopUI
     //==========================================Quit UI===========================================
     private void displayQuit()
     {
-        shopCtrl.logOut();
+        shopCtrl.logout();
         new App2UI();
     }
 
@@ -442,7 +448,10 @@ public class ShopUI
             @Override
             public void windowClosing(WindowEvent e)
             {
-                shopCtrl.logOut();
+                if (!shopCtrl.logout())
+                {
+                    System.out.println("Log out failed");
+                }
                 System.exit(0);
             }
         });

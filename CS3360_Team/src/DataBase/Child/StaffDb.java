@@ -76,7 +76,7 @@ public class StaffDb extends AbstractDb
         Shop shop = new ShopDb().queryShopPriData(shopId);
 
         // List<CustomerRequest>
-        queryValue = "StaffId";
+        queryValue = "HandledStaffId";
         datas = new CustomerRequestDb().queryCustomerRequestRawDatas(queryData, queryValue);
         List<CustomerRequest> customerRequests = new ArrayList<>();
         for (List<DbData> customerRequestData : datas)
@@ -95,7 +95,11 @@ public class StaffDb extends AbstractDb
         DbData queryData = new DbData(userName);
         String queryValue = "UserName";
         List<List<DbData>> datas = this.queryStaffRawDatas(queryData, queryValue);
-        if (datas.isEmpty()) return null;
+        if (datas.isEmpty()) 
+        {
+            System.out.println("queryStaffByUserName(): No Staff with UserName: " + userName);
+            return null;
+        }
 
         return this.queryStaffData(datas.get(0).get(0).getValueStr());
     }
@@ -140,7 +144,7 @@ public class StaffDb extends AbstractDb
     }
 
     //===========================================Delete===========================================
-    public boolean deleteStaffData(String id)
+    public boolean deleteStaffData(String id, String userName)
     {
         String sql = "DELETE FROM Staffs WHERE Id = ?";
         DbData idData = new DbData(id);

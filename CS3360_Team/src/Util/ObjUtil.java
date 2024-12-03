@@ -52,4 +52,12 @@ public final class ObjUtil
         else if (itemType == ItemType.Tool) return 3;
         else return 0;
     }
+
+    public final ItemType getItemTypeFromStr(String value)
+    {
+        if (value.equals("Food")) return ItemType.Food;
+        else if (value.equals("Cloth")) return ItemType.Cloth;
+        else if (value.equals("Tool")) return ItemType.Tool;
+        return null;
+    }
 }

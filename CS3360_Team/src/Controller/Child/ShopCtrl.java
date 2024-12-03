@@ -415,16 +415,35 @@ public class ShopCtrl extends AbstractObjCtrl
 
 
     //============================================================================================
-    //==========================================Log Out===========================================
+    //===========================================Other============================================
     //============================================================================================
-    public void logOut()
+    public boolean logout()
     {
         Shop shop = this.queryInfo();
+        if (shop == null)
+        {
+            System.out.println("logout(): Error: Shop not found");
+            return false;
+        }
+
         shop.setIsLogin(false);
         this.updateInfo(shop);
+        return true;
     }
 
-    
+    public boolean login()
+    {
+        Shop shop = this.queryInfo();
+        if (shop == null)
+        {
+            System.out.println("login(): Error: Shop not found");
+            return false;
+        }
+
+        shop.setIsLogin(true);
+        ShopDb.getInstance().updateShopData(shop);
+        return true;
+    }    
     
     //============================================================================================
     //==========================================Override==========================================
