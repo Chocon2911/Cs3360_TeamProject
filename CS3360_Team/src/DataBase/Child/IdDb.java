@@ -7,6 +7,16 @@ import java.util.List;
 
 public class IdDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static IdDb instance;
+
+    //=========================================Singleton==========================================
+    public static IdDb getInstance()
+    {
+        if (instance == null) instance = new IdDb();
+        return instance;
+    }
+
     //========================================CreateTable=========================================
     public boolean createIdTable()
     {

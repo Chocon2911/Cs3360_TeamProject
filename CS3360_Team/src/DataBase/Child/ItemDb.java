@@ -6,6 +6,16 @@ import java.util.*;
 
 public class ItemDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static ItemDb instance;
+
+    //=========================================Singleton==========================================
+    public static ItemDb getInstance()
+    {
+        if (instance == null) instance = new ItemDb();
+        return instance;
+    }
+
     //========================================Create Table========================================
     public boolean createItemTable()
     {

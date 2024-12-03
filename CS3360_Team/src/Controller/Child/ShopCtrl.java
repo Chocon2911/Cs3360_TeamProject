@@ -383,7 +383,7 @@ public class ShopCtrl extends AbstractObjCtrl
         Shop shop = this.queryInfo();
         Manager insertManager = new Manager(managerId, name, userName, password, false, shop);
 
-        String e = new ManagerDb().insertManagerData(insertManager);
+        String e = ManagerDb.getInstance().insertManagerData(insertManager);
         if (e == null) return 0;
         else if (e.contains("Managers.Id"))
         {
@@ -402,7 +402,7 @@ public class ShopCtrl extends AbstractObjCtrl
     //============================================================================================
     public int changeCheckInCode(String checkInCode) 
     { 
-        Shop shop = new ShopDb().queryShopByCheckInCode(checkInCode);
+        Shop shop = ShopDb.getInstance().queryShopByCheckInCode(checkInCode);
         if (shop != null) return 1;
 
         Shop updateShop = this.queryInfo();
@@ -432,17 +432,17 @@ public class ShopCtrl extends AbstractObjCtrl
     @Override
     protected <T> String insertInfo(T info)
     {
-        return new ShopDb().insertShopData((Shop)info);
+        return ShopDb.getInstance().insertShopData((Shop)info);
     }
     @Override
     @SuppressWarnings("unchecked")
     protected Shop queryInfo()
     {
-        return new ShopDb().queryShopData(id);
+        return ShopDb.getInstance().queryShopData(id);
     }
     @Override 
     protected <T> String updateInfo(T info)
     {
-        return new ShopDb().updateShopData((Shop)info);
+        return ShopDb.getInstance().updateShopData((Shop)info);
     }
 }

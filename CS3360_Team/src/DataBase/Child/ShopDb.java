@@ -7,6 +7,16 @@ import java.util.List;
 
 public class ShopDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static ShopDb instance;
+
+    //=========================================Singleton==========================================
+    public static ShopDb getInstance()
+    {
+        if (instance == null) instance = new ShopDb();
+        return instance;
+    }
+
     //========================================Create Table========================================
     public boolean createShopTable()
     {

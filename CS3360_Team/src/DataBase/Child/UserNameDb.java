@@ -5,6 +5,16 @@ import java.util.*;
 
 public class UserNameDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static UserNameDb instance;
+
+    //=========================================Singleton==========================================
+    public static UserNameDb getInstance()
+    {
+        if (instance == null) instance = new UserNameDb();
+        return instance;
+    }
+
     //========================================CreateTable=========================================
     public boolean createUserNameTable()
     {

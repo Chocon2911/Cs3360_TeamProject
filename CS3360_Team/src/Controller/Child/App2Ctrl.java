@@ -9,7 +9,7 @@ public class App2Ctrl
     //===========================================Login============================================
     public int login(String userName, String password)
     {
-        Shop shop = new ShopDb().queryShopByUserName(userName);
+        Shop shop = ShopDb.getInstance().queryShopByUserName(userName);
         if (shop == null) return 1; // UserName Not Found
         else if (!shop.getPassword().equals(password)) return 2; // Password Wrong
         
@@ -20,7 +20,7 @@ public class App2Ctrl
 
     public String getUserId(String userName, String password) 
     { 
-        Shop shop = new ShopDb().queryShopByUserName(userName);
+        Shop shop = ShopDb.getInstance().queryShopByUserName(userName);
         if (shop == null) return null;
         else if (!shop.getPassword().equals(password)) return null;
 
@@ -33,7 +33,7 @@ public class App2Ctrl
         String shopId = ObjUtil.getInstance().getRandomStr(10);
         Shop shop = new Shop(shopId, name, userName, password, false, systemCode, checkInCode, null, null, null, null, null);
 
-        String e = new ShopDb().insertShopData(shop);
+        String e = ShopDb.getInstance().insertShopData(shop);
         if (e == null) return 0;
         else if (e.contains("Shops.Id"))
         {

@@ -10,6 +10,16 @@ import java.util.*;
 
 public class StaffDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static StaffDb instance;
+
+    //=========================================Singleton==========================================
+    public static StaffDb getInstance()
+    {
+        if (instance == null) instance = new StaffDb();
+        return instance;
+    }
+
     //========================================Create Table========================================
     public boolean createStaffTable()
     {

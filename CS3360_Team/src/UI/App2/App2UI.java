@@ -427,15 +427,15 @@ public class App2UI
     //============================================Test============================================
     public static void main(String[] args) 
     {
-        new IdDb().createIdTable();
-        new UserNameDb().createUserNameTable();
-        new ShopDb().createShopTable();
-        new CustomerDb().createCustomerTable();
-        new StaffDb().createStaffTable();
-        new ManagerDb().createManagerTable();
-        new ItemDb().createItemTable();
-        new RequestedItemDb().createRequestedItemTable();
-        new CustomerRequestDb().createCustomerRequestTable();
+        IdDb.getInstance().createIdTable();
+        UserNameDb.getInstance().createUserNameTable();
+        ShopDb.getInstance().createShopTable();
+        CustomerDb.getInstance().createCustomerTable();
+        StaffDb.getInstance().createStaffTable();
+        ManagerDb.getInstance().createManagerTable();
+        ItemDb.getInstance().createItemTable();
+        RequestedItemDb.getInstance().createRequestedItemTable();
+        CustomerRequestDb.getInstance().createCustomerRequestTable();
 
         new App2UI();
     }

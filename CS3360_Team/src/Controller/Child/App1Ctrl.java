@@ -13,21 +13,21 @@ public class App1Ctrl
     //===========================================Login============================================
     public int login(String userName, String password)
     {
-        Customer customer = new CustomerDb().queryCustomerByUserName(userName);
+        Customer customer = CustomerDb.getInstance().queryCustomerByUserName(userName);
         if (customer != null)
         {
             if (customer.getPassword().equals(password)) return 1;
             else return 2;
         }
 
-        Staff staff = new StaffDb().queryStaffByUserName(userName);
+        Staff staff = StaffDb.getInstance().queryStaffByUserName(userName);
         if (staff != null)
         {
             if (staff.getPassword().equals(password)) return 3;
             else return 4;
         }
 
-        Manager manager = new ManagerDb().queryManagerByUserName(userName);
+        Manager manager = ManagerDb.getInstance().queryManagerByUserName(userName);
         if (manager != null)
         {
             if (manager.getPassword().equals(password)) return 5;
@@ -39,7 +39,7 @@ public class App1Ctrl
 
     public String getCustomerId(String userName, String password)
     {
-        Customer customer = new CustomerDb().queryCustomerByUserName(userName);
+        Customer customer = CustomerDb.getInstance().queryCustomerByUserName(userName);
         if (customer == null) return null;
         else if (customer.getPassword().equals(password)) return null;
         
@@ -48,7 +48,7 @@ public class App1Ctrl
 
     public String getStaffId(String userName, String password)
     {
-        Staff staff = new StaffDb().queryStaffByUserName(userName);
+        Staff staff = StaffDb.getInstance().queryStaffByUserName(userName);
         if (staff == null) return null;
         else if (staff.getPassword().equals(password)) return null;
         
@@ -57,7 +57,7 @@ public class App1Ctrl
 
     public String getManagerId(String userName, String password)
     {
-        Manager manager = new ManagerDb().queryManagerByUserName(userName);
+        Manager manager = ManagerDb.getInstance().queryManagerByUserName(userName);
         if (manager == null) return null;
         else if (manager.getPassword().equals(password)) return null;
         
@@ -70,7 +70,7 @@ public class App1Ctrl
         String id = ObjUtil.getInstance().getRandomStr(10);
         Customer customer = new Customer(id, name, userName, password, false, 0);
 
-        String e = new CustomerDb().insertCustomerData(customer);
+        String e = CustomerDb.getInstance().insertCustomerData(customer);
         if (e == null) return 0;
         else if (e.contains("Customers.Id"))
         {

@@ -19,18 +19,18 @@ public class ManagerCtrl extends AbstractObjCtrl
     @Override
     protected <T> String insertInfo(T info)
     {
-        return new ManagerDb().insertManagerData((Manager)info);
+        return ManagerDb.getInstance().insertManagerData((Manager)info);
     }
     @Override
     @SuppressWarnings("unchecked")
     protected Manager queryInfo() 
     { 
-        return new ManagerDb().queryManagerData(id); 
+        return ManagerDb.getInstance().queryManagerData(id); 
     }
     @Override
     protected <T> String updateInfo(T info)
     {
-        return new ManagerDb().updateManagerData((Manager)info);
+        return ManagerDb.getInstance().updateManagerData((Manager)info);
     }
 
 
@@ -87,7 +87,7 @@ public class ManagerCtrl extends AbstractObjCtrl
     //============================================================================================
     public int joinShop(String checkInCode)
     {
-        Shop shop = new ShopDb().queryShopByCheckInCode(checkInCode);
+        Shop shop = ShopDb.getInstance().queryShopByCheckInCode(checkInCode);
         if (shop == null) // No Shop with CheckInCode 
         {
             System.out.println("joinShop(): No Shop with CheckInCode: " + checkInCode);
@@ -104,7 +104,7 @@ public class ManagerCtrl extends AbstractObjCtrl
 
     public String getShopIdByCheckInCode(String checkInCode)
     {
-        Shop shop = new ShopDb().queryShopByCheckInCode(checkInCode);
+        Shop shop = ShopDb.getInstance().queryShopByCheckInCode(checkInCode);
         if (shop == null)
         {
             System.out.println("getShopIdByCheckInCode(): No Shop with CheckInCode: " + checkInCode);
@@ -122,7 +122,7 @@ public class ManagerCtrl extends AbstractObjCtrl
     {
         String id = ObjUtil.getInstance().getRandomStr(10);
         Staff staff = new Staff(id, name, userName, password, false);
-        String e = new StaffDb().insertStaffData(staff);
+        String e = StaffDb.getInstance().insertStaffData(staff);
         if (e.contains("Staffs.Id")) return 1; // Id Already exists
         else if (e.contains("Staffs.UserName")) return 2; // UserName is already exist
 
@@ -131,7 +131,7 @@ public class ManagerCtrl extends AbstractObjCtrl
 
     public String getStaffId(String userName, String password)
     {
-        Staff staff = new StaffDb().queryStaffByUserName(userName);
+        Staff staff = StaffDb.getInstance().queryStaffByUserName(userName);
         if (staff == null) return null;
         else if (!staff.getPassword().equals(password)) return null;
 
@@ -143,6 +143,23 @@ public class ManagerCtrl extends AbstractObjCtrl
     //============================================================================================
     //========================================Delete Staff========================================
     //============================================================================================
+    public int deleteStaff(String userName)
+    {
+        Staff staff = StaffDb.getInstance().queryStaffByUserName(userName);
+        if (staff == null) // No Staff with UserName
+        {
+            System.out.println("deleteStaff(): No Staff with UserName: " + userName);
+            return 1;
+        }
+        
+        boolean delete = StaffDb.getInstance().deleteStaffData(staff.getId());
+        if (!delete)
+        {
+            System.out.println("deleteStaff(): Can't Delete Staff with Id: " + staff.getId());
+            return 2;
+        }
+        return 0;
+    }
 
 
 

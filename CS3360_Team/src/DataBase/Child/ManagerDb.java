@@ -10,6 +10,16 @@ import java.util.List;
 
 public class ManagerDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static ManagerDb instance;
+
+    //=========================================Singleton==========================================
+    public static ManagerDb getInstance()
+    {
+        if (instance == null) instance = new ManagerDb();
+        return instance;
+    }
+
     //========================================Create Table========================================
     public boolean createManagerTable()
     {

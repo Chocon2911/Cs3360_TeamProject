@@ -6,6 +6,16 @@ import java.util.*;
 
 public class CustomerDb extends AbstractDb
 {
+    //==========================================Variable==========================================
+    private static CustomerDb instance;
+
+    //=========================================Singleton==========================================
+    public static final CustomerDb getInstance()
+    {
+        if (instance == null) instance = new CustomerDb();
+        return instance;
+    }
+
     //========================================Create Table========================================
     public boolean createCustomerTable()
     {
