@@ -24,7 +24,7 @@ public class ManagerUI
     public ManagerUI(String id)
     {
         this.ctrl = new ManagerCtrl(id);
-        this.displayMain();
+        this.displayPreMain();
     }
 
     //=========================================PreMain UI=========================================
@@ -216,7 +216,9 @@ public class ManagerUI
         backButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
-            displayMain();
+            int backButtonPressed = ctrl.backButtonPressed();
+            if (backButtonPressed == 1) displayPreMain();
+            else if (backButtonPressed == 2) displayMain();
         });
 
         // Display
@@ -298,7 +300,8 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
-            
+            frame.dispose();
+            displayPreMain();
         });
 
         // Join Button
@@ -306,7 +309,25 @@ public class ManagerUI
         guiUtil.setAlignmentCenter(joinButton);
         joinButton.addActionListener((ActionEvent e) -> 
         {
-            
+            String checkInCode = checkInCodeTextField.getText();
+
+            int joinShop = ctrl.joinShop(checkInCode);
+            if (joinShop == 1) // Wrong CheckInCode
+            {
+                System.out.println("joinShop(): Wrong CheckInCode: " + checkInCode);
+                JOptionPane.showMessageDialog(null, "Wrong CheckInCode!");
+            }
+            else if (joinShop == 2) // Shop is not online
+            {
+                System.out.println("joinShop(): Shop is not online: " + checkInCode);
+                JOptionPane.showMessageDialog(null, "Wrong CheckInCode");
+            } 
+            else // Success
+            {
+                JOptionPane.showMessageDialog(null, "Join Shop successfully");
+                frame.dispose();
+                displayMain();
+            }
         });
 
         // Display

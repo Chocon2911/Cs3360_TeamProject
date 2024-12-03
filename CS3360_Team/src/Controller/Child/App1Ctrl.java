@@ -16,7 +16,11 @@ public class App1Ctrl
         Customer customer = CustomerDb.getInstance().queryCustomerByUserName(userName);
         if (customer != null)
         {
-            if (customer.getPassword().equals(password)) return 1; // Login Customer
+            if (customer.getPassword().equals(password)) // Login Customer
+            {
+                customer.setIsLogin(true);
+                return 1;
+            }
             else return 2;
         }
 

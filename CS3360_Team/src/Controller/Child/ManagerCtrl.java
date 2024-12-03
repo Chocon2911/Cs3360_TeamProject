@@ -89,6 +89,18 @@ public class ManagerCtrl extends AbstractObjCtrl
         return mainPanel;
     }
 
+    public int backButtonPressed()
+    {
+        Manager manager = this.queryInfo();
+        if (manager.getShop() == null) // Doesn't join Shop yet
+        {
+            System.out.println("backButton(): Doesn't join Shop");
+            return 1;
+        }
+
+        return 0; // Joined Shop
+    }
+
 
 
     //============================================================================================
@@ -102,12 +114,15 @@ public class ManagerCtrl extends AbstractObjCtrl
             System.out.println("joinShop(): No Shop with CheckInCode: " + checkInCode);
             return 1;
         }
-        else if (shop.getIsLogin()) // Shop is not online yet
+        else if (!shop.getIsLogin()) // Shop is not online yet
         {
             System.out.println("joinShop(): Shop is not online yet: " + checkInCode);
-            return 1;
+            return 2;
         }
 
+        Manager manager = this.queryInfo();
+        manager.setShop(shop);
+        this.updateInfo(manager);
         return 0;
     }
 
