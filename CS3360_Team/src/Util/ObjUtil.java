@@ -5,7 +5,7 @@ import java.util.Random;
 
 public final class ObjUtil
 {
-    public ObjUtil instance;
+    private static ObjUtil instance;
 
     //=========================================Singleton==========================================
     public static ObjUtil getInstance()

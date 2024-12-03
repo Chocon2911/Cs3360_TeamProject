@@ -171,7 +171,6 @@ public class App2UI
                 frame.dispose();
                 new ShopUI(ctrl.getUserId(userName, password));
             }
-
             else if (login == 1) 
             {
                 JOptionPane.showMessageDialog(null, "User Name Not Found");
