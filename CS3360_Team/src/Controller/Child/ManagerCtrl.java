@@ -6,6 +6,7 @@ import DataBase.Child.ShopDb;
 import DataBase.Child.StaffDb;
 import Obj.Data.*;
 import Util.GuiUtil;
+import Util.ObjUtil;
 import javax.swing.*;
 
 public class ManagerCtrl extends AbstractObjCtrl
@@ -119,7 +120,7 @@ public class ManagerCtrl extends AbstractObjCtrl
     //============================================================================================
     public int createStaff(String name, String userName, String password)
     {
-        String id = this.getRandomStr(10);
+        String id = ObjUtil.getInstance().getRandomStr(10);
         Staff staff = new Staff(id, name, userName, password, false);
         String e = new StaffDb().insertStaffData(staff);
         if (e.contains("Staffs.Id")) return 1; // Id Already exists

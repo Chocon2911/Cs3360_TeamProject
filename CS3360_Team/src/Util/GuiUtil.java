@@ -3,7 +3,7 @@ package Util;
 import java.awt.*;
 import javax.swing.*;
 
-public class GuiUtil
+public final class GuiUtil
 {
     //==========================================Variable==========================================
     // Instance

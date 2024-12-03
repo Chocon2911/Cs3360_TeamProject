@@ -8,7 +8,7 @@ import Obj.Data.Manager;
 import Obj.Data.Staff;
 import Util.ObjUtil;
 
-public class App1Ctrl extends ObjUtil
+public class App1Ctrl
 {
     //===========================================Login============================================
     public int login(String userName, String password)
@@ -67,7 +67,7 @@ public class App1Ctrl extends ObjUtil
     //===========================================SignUp===========================================
     public int signUp(String name, String userName, String password)
     {
-        String id = this.getRandomStr(10);
+        String id = ObjUtil.getInstance().getRandomStr(10);
         Customer customer = new Customer(id, name, userName, password, false, 0);
 
         String e = new CustomerDb().insertCustomerData(customer);

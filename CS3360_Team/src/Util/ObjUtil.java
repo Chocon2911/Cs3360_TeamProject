@@ -3,12 +3,12 @@ package Util;
 import Obj.Data.ItemType;
 import java.util.Random;
 
-public class ObjUtil
+public final class ObjUtil
 {
     public ObjUtil instance;
 
     //=========================================Singleton==========================================
-    public ObjUtil getInstance()
+    public static ObjUtil getInstance()
     {
         if (instance == null) instance = new ObjUtil();
         return instance;

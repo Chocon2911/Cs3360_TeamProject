@@ -5,6 +5,7 @@ import DataBase.Child.ManagerDb;
 import DataBase.Child.ShopDb;
 import Obj.Data.*;
 import Util.GuiUtil;
+import Util.ObjUtil;
 import java.awt.Font;
 import javax.swing.*;
 
@@ -378,7 +379,7 @@ public class ShopCtrl extends AbstractObjCtrl
     //============================================================================================
     public int createManager(String name, String userName, String password)
     {
-        String managerId = this.getRandomStr(10);
+        String managerId = ObjUtil.getInstance().getRandomStr(10);
         Shop shop = this.queryInfo();
         Manager insertManager = new Manager(managerId, name, userName, password, false, shop);
 

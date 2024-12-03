@@ -1,11 +1,10 @@
 package DataBase.Base;
 
-import Util.ObjUtil;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractDb extends ObjUtil
+public abstract class AbstractDb
 {
     protected static String url = "src/DataBase/ShopDataBase.db";
     

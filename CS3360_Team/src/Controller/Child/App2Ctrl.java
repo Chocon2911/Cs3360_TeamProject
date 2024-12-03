@@ -4,7 +4,7 @@ import DataBase.Child.ShopDb;
 import Obj.Data.Shop;
 import Util.ObjUtil;
 
-public class App2Ctrl extends ObjUtil
+public class App2Ctrl
 {
     //===========================================Login============================================
     public int login(String userName, String password)
@@ -30,7 +30,7 @@ public class App2Ctrl extends ObjUtil
     //==========================================Sign Up===========================================
     public int signUp(String name, String userName, String password, String checkInCode, String systemCode)
     {
-        String shopId = this.getRandomStr(10);
+        String shopId = ObjUtil.getInstance().getRandomStr(10);
         Shop shop = new Shop(shopId, name, userName, password, false, systemCode, checkInCode, null, null, null, null, null);
 
         String e = new ShopDb().insertShopData(shop);
