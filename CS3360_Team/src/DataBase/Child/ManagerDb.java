@@ -85,7 +85,11 @@ public class ManagerDb extends AbstractDb
         DbData queryData = new DbData(userName);
         String queryValue = "UserName";
         List<List<DbData>> datas = this.queryManagerRawDatas(queryData, queryValue);
-        if (datas.isEmpty()) return null;
+        if (datas.isEmpty()) 
+        {
+            System.out.println("queryManagerByUserName(): datas is null: " + userName);
+            return null;
+        }
 
         return this.queryManagerData(datas.get(0).get(0).getValueStr());
     }

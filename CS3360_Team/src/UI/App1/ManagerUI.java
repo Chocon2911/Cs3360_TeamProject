@@ -24,6 +24,7 @@ public class ManagerUI
     public ManagerUI(String id)
     {
         this.ctrl = new ManagerCtrl(id);
+        this.displayMain();
     }
 
     //=========================================PreMain UI=========================================

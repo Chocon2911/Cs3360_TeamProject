@@ -1,6 +1,7 @@
 package Controller.Child;
 
 import Controller.Base.AbstractObjCtrl;
+import DataBase.Child.ItemDb;
 import DataBase.Child.ManagerDb;
 import DataBase.Child.ShopDb;
 import DataBase.Child.StaffDb;
@@ -25,7 +26,14 @@ public class ManagerCtrl extends AbstractObjCtrl
     @SuppressWarnings("unchecked")
     protected Manager queryInfo() 
     { 
-        return ManagerDb.getInstance().queryManagerData(id); 
+        Manager manager = ManagerDb.getInstance().queryManagerData(id);
+        if (manager == null)
+        {
+            System.out.println("queryInfo(): Manager is null with Id: " + id);
+            return null;
+        } 
+
+        return manager;
     }
     @Override
     protected <T> String updateInfo(T info)
@@ -41,6 +49,7 @@ public class ManagerCtrl extends AbstractObjCtrl
     public JPanel displayInfo()
     {
         Manager manager = this.queryInfo();
+        if (manager == null) return null;
 
         // MainPanel
         JPanel mainPanel = GuiUtil.getInstance().getMainPanel();
@@ -120,8 +129,8 @@ public class ManagerCtrl extends AbstractObjCtrl
     //============================================================================================
     public int createStaff(String name, String userName, String password)
     {
-        String id = ObjUtil.getInstance().getRandomStr(10);
-        Staff staff = new Staff(id, name, userName, password, false);
+        String staffId = ObjUtil.getInstance().getRandomStr(10);
+        Staff staff = new Staff(staffId, name, userName, password, false);
         String e = StaffDb.getInstance().insertStaffData(staff);
         if (e.contains("Staffs.Id")) return 1; // Id Already exists
         else if (e.contains("Staffs.UserName")) return 2; // UserName is already exist
@@ -166,4 +175,28 @@ public class ManagerCtrl extends AbstractObjCtrl
     //============================================================================================
     //==========================================Add Item==========================================
     //============================================================================================
+    public int addItem(String name, float price, int initAmount, ItemType itemType)
+    {
+        if (price <= 0) // Price is too low
+        {
+            System.out.println("addItem(): Price is set too low: " + price);
+            return 1;
+        }
+        else if (initAmount <= 0) // InitAmount is too low
+        {
+            System.out.println("addItem(): Init Amount is set too low: " + initAmount);
+            return 2;
+        }
+
+        String itemId = ObjUtil.getInstance().getRandomStr(10);
+        Item item = new Item(itemId, name, price, itemType, initAmount);
+        String e = ItemDb.getInstance().insertItemData(item);
+        if (e.contains("Items.Id")) // Id already exists
+        {
+            System.out.println("addItem(): Id already exists: " + itemId);
+            return 3;
+        }        
+
+        return 0; // Add Successfully
+    }
 }

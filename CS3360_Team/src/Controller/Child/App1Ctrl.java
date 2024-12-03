@@ -16,22 +16,22 @@ public class App1Ctrl
         Customer customer = CustomerDb.getInstance().queryCustomerByUserName(userName);
         if (customer != null)
         {
-            if (customer.getPassword().equals(password)) return 1;
+            if (customer.getPassword().equals(password)) return 1; // Login Customer
             else return 2;
         }
 
         Staff staff = StaffDb.getInstance().queryStaffByUserName(userName);
         if (staff != null)
         {
-            if (staff.getPassword().equals(password)) return 3;
+            if (staff.getPassword().equals(password)) return 3; // Login Staff
             else return 4;
         }
 
         Manager manager = ManagerDb.getInstance().queryManagerByUserName(userName);
         if (manager != null)
         {
-            if (manager.getPassword().equals(password)) return 5;
-            else return 6;
+            if (manager.getPassword().equals(password)) return 5; // Login Manager
+            else return 6; 
         }
 
         return 0;
@@ -41,7 +41,7 @@ public class App1Ctrl
     {
         Customer customer = CustomerDb.getInstance().queryCustomerByUserName(userName);
         if (customer == null) return null;
-        else if (customer.getPassword().equals(password)) return null;
+        else if (!customer.getPassword().equals(password)) return null;
         
         return customer.getId();
     }
@@ -50,7 +50,7 @@ public class App1Ctrl
     {
         Staff staff = StaffDb.getInstance().queryStaffByUserName(userName);
         if (staff == null) return null;
-        else if (staff.getPassword().equals(password)) return null;
+        else if (!staff.getPassword().equals(password)) return null;
         
         return staff.getId();
     }
@@ -58,8 +58,16 @@ public class App1Ctrl
     public String getManagerId(String userName, String password)
     {
         Manager manager = ManagerDb.getInstance().queryManagerByUserName(userName);
-        if (manager == null) return null;
-        else if (manager.getPassword().equals(password)) return null;
+        if (manager == null) 
+        {
+            System.out.println("getManagerId(): wrong userName: " + userName);
+            return null;
+        }
+        else if (!manager.getPassword().equals(password))
+        {
+            System.out.println("getManagerId(): wrong password: " + password);
+            return null;
+        }
         
         return manager.getId();
     }
