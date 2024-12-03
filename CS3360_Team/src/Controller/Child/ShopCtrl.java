@@ -61,6 +61,8 @@ public class ShopCtrl extends AbstractObjCtrl
     //========================================Private Info========================================
     private JPanel displayPrivateInfo()
     {
+        Shop shop = this.queryInfo();
+
         // Panel
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -70,18 +72,34 @@ public class ShopCtrl extends AbstractObjCtrl
         this.setAlignmentCenter(titleLabel);
         titleLabel.setFont(new Font("Arial", Font.BOLD, this.normalTitleSize));
 
+        // Id Label
+        JLabel idLabel = this.getNormalLabel("Id: " + shop.getId());
+
+        // Name Label
+        JLabel nameLabel = this.getNormalLabel("Name: " + shop.getName());
+
+        // UserName Label
+        JLabel userNameLabel = this.getNormalLabel("User Name: " + shop.getUserName());
+
+        // Password Label
+        JLabel passwordLabel = this.getNormalLabel("Password: " + shop.getPassword());
+
         // SystemCode Label
-        JLabel systemCodeLabel = new JLabel("System Code: " + this.queryInfo().getSystemCode());
-        this.setAlignmentCenter(systemCodeLabel);
-        systemCodeLabel.setFont(new Font("Arial", Font.BOLD, this.normalTextSize));
+        JLabel systemCodeLabel = this.getNormalLabel("System Code: " + shop.getSystemCode());
 
         // CheckInCode Label
-        JLabel checkInCodeLabel = new JLabel("Check In Code: " + this.queryInfo().getCheckInCode());
-        this.setAlignmentCenter(checkInCodeLabel);
-        checkInCodeLabel.setFont(new Font("Arial", Font.BOLD, this.normalTextSize));
+        JLabel checkInCodeLabel = this.getNormalLabel("Check In Code: " + shop.getCheckInCode());
 
         // Display
         panel.add(titleLabel);
+        panel.add(Box.createVerticalStrut(this.verticalStrut));
+        panel.add(idLabel);
+        panel.add(Box.createVerticalStrut(this.verticalStrut));
+        panel.add(nameLabel);
+        panel.add(Box.createVerticalStrut(this.verticalStrut));
+        panel.add(userNameLabel);
+        panel.add(Box.createVerticalStrut(this.verticalStrut));
+        panel.add(passwordLabel);
         panel.add(Box.createVerticalStrut(this.verticalStrut));
         panel.add(systemCodeLabel);
         panel.add(Box.createVerticalStrut(this.verticalStrut));

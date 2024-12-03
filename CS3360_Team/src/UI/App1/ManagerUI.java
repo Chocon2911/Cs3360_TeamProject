@@ -12,13 +12,13 @@ import javax.swing.*;
 
 public class ManagerUI extends GuiUtil
 {
-    private ManagerCtrl ctrl;
+    private final ManagerCtrl ctrl;
     
     //========================================Constructor=========================================
     public ManagerUI()
     {
         this.displayMain();
-        this.ctrl = null;
+        this.ctrl = new ManagerCtrl();
     }
 
     public ManagerUI(String id)
@@ -193,7 +193,7 @@ public class ManagerUI extends GuiUtil
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
         panel.add(Box.createHorizontalStrut(verticalStrut));
-        // panel.add(ctrl.displayInfo());
+        panel.add(ctrl.displayInfo());
         panel.add(Box.createVerticalGlue());
 
 
@@ -264,7 +264,7 @@ public class ManagerUI extends GuiUtil
         // Label
         JLabel checkInCodeLabel = new JLabel("CheckIn Code:");
         this.setAlignmentCenter(checkInCodeLabel);
-        this.setFixedSize(checkInCodeLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(checkInCodeLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JTextField checkInCodeTextField = new JTextField(this.textFieldAmount);
@@ -420,7 +420,7 @@ public class ManagerUI extends GuiUtil
         // Label
         JLabel idLabel = new JLabel("Id:");
         this.setAlignmentCenter(idLabel);
-        this.setFixedSize(idLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(idLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JTextField idTextField = new JTextField(this.textFieldAmount);
@@ -510,7 +510,7 @@ public class ManagerUI extends GuiUtil
         // Label
         JLabel nameLabel = new JLabel("Name:");
         this.setAlignmentCenter(nameLabel);
-        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(nameLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JTextField nameTextField = new JTextField(this.textFieldAmount);
@@ -533,7 +533,7 @@ public class ManagerUI extends GuiUtil
         // Label
         JLabel priceLabel = new JLabel("Price:");
         this.setAlignmentCenter(priceLabel);
-        this.setFixedSize(priceLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(priceLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JTextField priceTextField = new JTextField(this.textFieldAmount);
@@ -556,7 +556,7 @@ public class ManagerUI extends GuiUtil
         // Label
         JLabel itemTypeLabel = new JLabel("ItemType:");
         this.setAlignmentCenter(itemTypeLabel);
-        this.setFixedSize(itemTypeLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(itemTypeLabel, smallLabelWidth, smallLabelHeight);
 
         // JList
 
@@ -571,7 +571,7 @@ public class ManagerUI extends GuiUtil
         // Label
         JLabel amountLabel = new JLabel("Amount:");
         this.setAlignmentCenter(amountLabel);
-        this.setFixedSize(amountLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(amountLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JTextField amountTextField = new JTextField(this.textFieldAmount);

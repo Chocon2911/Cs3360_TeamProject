@@ -4,7 +4,7 @@ import Controller.Child.StaffCtrl;
 
 public class StaffUI 
 {
-    private StaffCtrl ctrl;
+    private final StaffCtrl ctrl;
     
     public StaffUI()
     {

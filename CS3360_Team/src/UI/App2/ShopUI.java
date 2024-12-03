@@ -13,7 +13,7 @@ import javax.swing.*;
 public class ShopUI extends GuiUtil
 {
     //==========================================Variable==========================================
-    private ShopCtrl shopCtrl;
+    private final ShopCtrl shopCtrl;
 
     //========================================Constructor=========================================
     public ShopUI()
@@ -196,7 +196,7 @@ public class ShopUI extends GuiUtil
         // Name Label
         JLabel nameLabel = new JLabel("Name: ");
         this.setAlignmentCenter(nameLabel);
-        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(nameLabel, smallLabelWidth, normalLabelHeight);
 
         // Name TextField
         JTextField nameTextField = new JTextField(this.textFieldAmount);
@@ -219,7 +219,7 @@ public class ShopUI extends GuiUtil
         // UserName Label
         JLabel userNameLabel = new JLabel("UserName: ");
         this.setAlignmentCenter(userNameLabel);
-        this.setFixedSize(userNameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(userNameLabel, smallLabelWidth, normalLabelHeight);
 
         // UserName TextField
         JTextField userNameTextField = new JTextField(this.textFieldAmount);
@@ -242,7 +242,7 @@ public class ShopUI extends GuiUtil
         // Password Label
         JLabel passwordLabel = new JLabel("Password: ");
         this.setAlignmentCenter(passwordLabel);
-        this.setFixedSize(passwordLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(passwordLabel, smallLabelWidth, normalLabelHeight);
 
         // Password TextField
         JPasswordField passwordTextField = new JPasswordField(this.textFieldAmount);
@@ -348,7 +348,7 @@ public class ShopUI extends GuiUtil
         // CheckIn Label
         JLabel checkInLabel = new JLabel("CheckIn Code: ");
         this.setAlignmentCenter(checkInLabel);
-        this.setFixedSize(checkInLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(checkInLabel, smallLabelWidth, normalLabelHeight);
 
         // CheckIn TextField
         JTextField checkInField = new JTextField(textFieldAmount);

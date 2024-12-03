@@ -15,7 +15,10 @@ public abstract class GuiUtil
     protected int verticalStrut = 20;
 
     // Label
-    protected int normalLabelWidth = 100;
+    protected int smallLabelWidth = 100;
+    protected int smallLabelHeight = 20;
+
+    protected int normalLabelWidth = 300;
     protected int normalLabelHeight = 20;
 
     // Panel
@@ -34,8 +37,8 @@ public abstract class GuiUtil
 
     // Font
     protected int bigTitleSize = 50;
-    protected int normalTitleSize = 40;
-    protected int smallTitleSize = 30;
+    protected int normalTitleSize = 30;
+    protected int smallTitleSize = 20;
 
     protected int normalTextSize = 15;
 
@@ -92,7 +95,7 @@ public abstract class GuiUtil
         // Label
         JLabel nameLabel = new JLabel(name);
         this.setAlignmentCenter(nameLabel);
-        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(nameLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JTextField textField = new JTextField(this.textFieldAmount);
@@ -117,7 +120,7 @@ public abstract class GuiUtil
         // Label
         JLabel nameLabel = new JLabel(name);
         this.setAlignmentCenter(nameLabel);
-        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(nameLabel, smallLabelWidth, smallLabelHeight);
 
         // TextField
         JPasswordField textField = new JPasswordField(this.textFieldAmount);
@@ -132,12 +135,30 @@ public abstract class GuiUtil
         return panel;
     }
 
-    //===========================================Title============================================
+    //===========================================Label============================================
     protected JLabel getTitleLabel(String name)
     {
         JLabel titleLabel = new JLabel(name);
         titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
         this.setAlignmentCenter(titleLabel);
         return titleLabel;
+    }
+
+    protected JLabel getNormalLabel(String name)
+    {
+        JLabel normalLabel = new JLabel(name);
+        normalLabel.setFont(new Font("Arial", Font.BOLD, normalTextSize));
+        this.setAlignmentCenter(normalLabel);
+        this.setFixedSize(normalLabel, normalLabelWidth, normalLabelHeight);
+        return normalLabel;
+    }
+
+    protected JLabel getSmallLabel(String name)
+    {
+        JLabel smallLabel = new JLabel(name);
+        smallLabel.setFont(new Font("Arial", Font.BOLD, smallTitleSize));
+        this.setAlignmentCenter(smallLabel);
+        this.setFixedSize(smallLabel, smallLabelWidth, smallLabelHeight);
+        return smallLabel;
     }
 }

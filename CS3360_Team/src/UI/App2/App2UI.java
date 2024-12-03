@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class App2UI extends GuiUtil
 {
-    private App2Ctrl ctrl;
+    private final App2Ctrl ctrl;
 
     //========================================Constructor=========================================
     public App2UI()
@@ -109,7 +109,7 @@ public class App2UI extends GuiUtil
 
         // UserName Label
         JLabel userNameLabel = new JLabel("User Name:");
-        this.setFixedSize(userNameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(userNameLabel, smallLabelWidth, smallLabelHeight);
 
         // UserName Text Field
         JTextField userNameTextField = new JTextField(textFieldAmount);
@@ -131,7 +131,7 @@ public class App2UI extends GuiUtil
 
         // Password Label
         JLabel passwordLabel = new JLabel("Password:");
-        this.setFixedSize(passwordLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(passwordLabel, smallLabelWidth, smallLabelHeight);
 
         // Password Text Field
         JPasswordField passwordTextField = new JPasswordField(textFieldAmount);
@@ -249,7 +249,7 @@ public class App2UI extends GuiUtil
 
         // Name Label
         JLabel nameLabel = new JLabel("Name:");
-        this.setFixedSize(nameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(nameLabel, smallLabelWidth, smallLabelHeight);
 
         // Name Field
         JTextField nameField = new JTextField(textFieldAmount);
@@ -271,7 +271,7 @@ public class App2UI extends GuiUtil
 
         // Label
         JLabel userNameLabel = new JLabel("User Name:");
-        this.setFixedSize(userNameLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(userNameLabel, smallLabelWidth, smallLabelHeight);
 
         // Text Field
         JTextField userNameField = new JTextField(textFieldAmount);
@@ -293,7 +293,7 @@ public class App2UI extends GuiUtil
 
         // Label
         JLabel passwordLabel = new JLabel("Password:");
-        this.setFixedSize(passwordLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(passwordLabel, smallLabelWidth, smallLabelHeight);
 
         // password Field
         JPasswordField passwordField = new JPasswordField(textFieldAmount);
@@ -315,7 +315,7 @@ public class App2UI extends GuiUtil
 
         // Label
         JLabel systemCodeLabel = new JLabel("System Code:");
-        this.setFixedSize(systemCodeLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(systemCodeLabel, smallLabelWidth, smallLabelHeight);
 
         // Text Field
         JTextField systemCodeField = new JTextField(textFieldAmount);
@@ -337,7 +337,7 @@ public class App2UI extends GuiUtil
 
         // Label
         JLabel checkInCodeLabel = new JLabel("Check In Code:");
-        this.setFixedSize(checkInCodeLabel, normalLabelWidth, normalLabelHeight);
+        this.setFixedSize(checkInCodeLabel, smallLabelWidth, smallLabelHeight);
 
         // Text Field
         JTextField checkInCodeField = new JTextField(textFieldAmount);
