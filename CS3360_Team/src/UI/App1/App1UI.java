@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
 
-public class App1UI extends GuiUtil
+public class App1UI
 {
     private final App1Ctrl ctrl;
 
@@ -21,9 +21,11 @@ public class App1UI extends GuiUtil
     //==========================================Main UI===========================================
     private void displayMain()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // Frame
         JFrame frame = new JFrame("App1");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,12 +35,12 @@ public class App1UI extends GuiUtil
 
         // Title Label
         JLabel titleLabel = new JLabel("App1");
-        this.setAlignmentCenter(titleLabel);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
         
         // Login Button
-        JButton loginButton = createButton("Login", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(loginButton);
+        JButton loginButton = guiUtil.createButton("Login", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(loginButton);
         loginButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -46,8 +48,8 @@ public class App1UI extends GuiUtil
         });
 
         // SignUp Button
-        JButton signUpButton = createButton("Sign Up", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(signUpButton);
+        JButton signUpButton = guiUtil.createButton("Sign Up", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(signUpButton);
         signUpButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -55,8 +57,8 @@ public class App1UI extends GuiUtil
         });
         
         // Quit Button
-        JButton quitButton = createButton("Quit", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(quitButton);
+        JButton quitButton = guiUtil.createButton("Quit", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(quitButton);
         quitButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -66,11 +68,11 @@ public class App1UI extends GuiUtil
         // Display
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(loginButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(signUpButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(quitButton);
         panel.add(Box.createVerticalGlue());
 
@@ -81,9 +83,11 @@ public class App1UI extends GuiUtil
     //==========================================Login UI==========================================
     private void displayLogin()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("App1.Login");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -95,8 +99,8 @@ public class App1UI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Login");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
-        this.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
 
 
 
@@ -104,19 +108,19 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel userNamePanel = new JPanel();
         userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(userNamePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(userNamePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // UserName Label
         JLabel userNameLabel = new JLabel("User Name:");
-        this.setFixedSize(userNameLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setFixedSize(userNameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // UserName Text Field
-        JTextField userNameTextField = new JTextField(textFieldAmount);
+        JTextField userNameTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         userNamePanel.add(Box.createHorizontalGlue());
         userNamePanel.add(userNameLabel);
-        userNamePanel.add(Box.createHorizontalStrut(horizontalStrut));
+        userNamePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         userNamePanel.add(userNameTextField);
         userNamePanel.add(Box.createHorizontalGlue());
 
@@ -126,19 +130,19 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel passwordPanel = new JPanel();
         passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(passwordPanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(passwordPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Password Label
         JLabel passwordLabel = new JLabel("Password:");
-        this.setFixedSize(passwordLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setFixedSize(passwordLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // Password Text Field
-        JPasswordField passwordTextField = new JPasswordField(textFieldAmount);
+        JPasswordField passwordTextField = new JPasswordField(guiUtil.textFieldAmount);
 
         // Display
         passwordPanel.add(Box.createHorizontalGlue());
         passwordPanel.add(passwordLabel);
-        passwordPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        passwordPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         passwordPanel.add(passwordTextField);
         passwordPanel.add(Box.createHorizontalGlue());
 
@@ -148,11 +152,11 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(buttonPanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(buttonPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Cancel Button
-        JButton cancelButton = createButton("Cancel", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(cancelButton);
+        JButton cancelButton = guiUtil.createButton("Cancel", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -160,8 +164,8 @@ public class App1UI extends GuiUtil
         });
         
         // Login Button
-        JButton loginButton = createButton("Login", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(loginButton);
+        JButton loginButton = guiUtil.createButton("Login", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(loginButton);
         loginButton.addActionListener((ActionEvent e) -> 
         {
             System.out.println("//===========================================Login============================================");
@@ -214,7 +218,7 @@ public class App1UI extends GuiUtil
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         buttonPanel.add(loginButton);
         buttonPanel.add(Box.createHorizontalGlue());
 
@@ -223,11 +227,11 @@ public class App1UI extends GuiUtil
         // ===Display===
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(userNamePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(passwordPanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
 
@@ -238,10 +242,12 @@ public class App1UI extends GuiUtil
     //=========================================SignUp UI==========================================
     private void displaySignUp()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("App2.Main.SignUp");
         frame.setResizable(false);
-        frame.setSize(frameWidth, frameWidth);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameWidth);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -254,8 +260,8 @@ public class App1UI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Sign Up");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
-        this.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
         
 
 
@@ -263,19 +269,19 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(namePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(namePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Name Label
         JLabel nameLabel = new JLabel("Name:");
-        this.setFixedSize(nameLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setFixedSize(nameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // Name Field
-        JTextField nameField = new JTextField(textFieldAmount);
+        JTextField nameField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         namePanel.add(Box.createHorizontalGlue());
         namePanel.add(nameLabel);
-        namePanel.add(Box.createHorizontalStrut(horizontalStrut));
+        namePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         namePanel.add(nameField);
         namePanel.add(Box.createHorizontalGlue());
 
@@ -285,19 +291,19 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel userNamePanel = new JPanel();
         userNamePanel.setLayout(new BoxLayout(userNamePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(userNamePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(userNamePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel userNameLabel = new JLabel("User Name:");
-        this.setFixedSize(userNameLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setFixedSize(userNameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // Text Field
-        JTextField userNameField = new JTextField(textFieldAmount);
+        JTextField userNameField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         userNamePanel.add(Box.createHorizontalGlue());
         userNamePanel.add(userNameLabel);
-        userNamePanel.add(Box.createHorizontalStrut(horizontalStrut));
+        userNamePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         userNamePanel.add(userNameField);
         userNamePanel.add(Box.createHorizontalGlue());
 
@@ -307,19 +313,19 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel passwordPanel = new JPanel();
         passwordPanel.setLayout(new BoxLayout(passwordPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(passwordPanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(passwordPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel passwordLabel = new JLabel("Password:");
-        this.setFixedSize(passwordLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setFixedSize(passwordLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // password Field
-        JPasswordField passwordField = new JPasswordField(textFieldAmount);
+        JPasswordField passwordField = new JPasswordField(guiUtil.textFieldAmount);
 
         // Display
         passwordPanel.add(Box.createHorizontalGlue());
         passwordPanel.add(passwordLabel);
-        passwordPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        passwordPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         passwordPanel.add(passwordField);
         passwordPanel.add(Box.createHorizontalGlue());
 
@@ -329,11 +335,11 @@ public class App1UI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(buttonPanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(buttonPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Cancel Button
-        JButton cancelButton = createButton("Cancel", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(cancelButton);
+        JButton cancelButton = guiUtil.createButton("Cancel", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -341,8 +347,8 @@ public class App1UI extends GuiUtil
         });
 
         // Register Button
-        JButton registerButton = createButton("Register", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(registerButton);
+        JButton registerButton = guiUtil.createButton("Register", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(registerButton);
         registerButton.addActionListener((ActionEvent e) -> 
         {   
             System.out.println("//==========================================Register==========================================");
@@ -373,7 +379,7 @@ public class App1UI extends GuiUtil
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(this.horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         buttonPanel.add(registerButton);
         buttonPanel.add(Box.createHorizontalGlue());
 
@@ -382,13 +388,13 @@ public class App1UI extends GuiUtil
         // ===Display===
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(namePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(userNamePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(passwordPanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
 

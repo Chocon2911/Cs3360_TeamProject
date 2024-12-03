@@ -10,7 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 
-public class ManagerUI extends GuiUtil
+public class ManagerUI
 {
     private final ManagerCtrl ctrl;
     
@@ -29,9 +29,11 @@ public class ManagerUI extends GuiUtil
     //=========================================PreMain UI=========================================
     private void displayPreMain() 
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // Frame
         JFrame frame = new JFrame("Manager.PreMain");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Change to logOut() later
 
@@ -41,12 +43,12 @@ public class ManagerUI extends GuiUtil
 
         // Title Label
         JLabel titleLabel = new JLabel("Manager");
-        this.setAlignmentCenter(titleLabel);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
 
         // Infomation Button
-        JButton infoButton = createButton("Information", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(infoButton);
+        JButton infoButton = guiUtil.createButton("Information", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(infoButton);
         infoButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -54,8 +56,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // JoinShop Button
-        JButton joinShopButton = createButton("Join Shop", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(joinShopButton);
+        JButton joinShopButton = guiUtil.createButton("Join Shop", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(joinShopButton);
         joinShopButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -63,8 +65,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // Quit Button
-        JButton quitButton = createButton("Quit", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(quitButton);
+        JButton quitButton = guiUtil.createButton("Quit", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(quitButton);
         quitButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -74,11 +76,11 @@ public class ManagerUI extends GuiUtil
         // Display
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(infoButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(joinShopButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(quitButton);
         panel.add(Box.createVerticalGlue());
 
@@ -89,9 +91,11 @@ public class ManagerUI extends GuiUtil
     //==========================================Main UI===========================================
     private void displayMain()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // Frame
         JFrame frame = new JFrame("Manager.Main");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -101,12 +105,12 @@ public class ManagerUI extends GuiUtil
 
         // Title Label
         JLabel titleLabel = new JLabel("Manager");
-        this.setAlignmentCenter(titleLabel);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
 
         // Info Button
-        JButton infoButton = createButton("Information", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(infoButton);
+        JButton infoButton = guiUtil.createButton("Information", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(infoButton);
         infoButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -114,8 +118,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // CreateStaff Button
-        JButton createStaffButton = createButton("Create Staff", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(createStaffButton);
+        JButton createStaffButton = guiUtil.createButton("Create Staff", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(createStaffButton);
         createStaffButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -123,8 +127,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // DeleteStaff Button
-        JButton deleteStaffButton = createButton("Delete Staff", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(deleteStaffButton);
+        JButton deleteStaffButton = guiUtil.createButton("Delete Staff", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(deleteStaffButton);
         deleteStaffButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -132,8 +136,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // AddItem Button
-        JButton addItemButton = createButton("Add Item", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(addItemButton);
+        JButton addItemButton = guiUtil.createButton("Add Item", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(addItemButton);
         addItemButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -141,8 +145,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // Quit Button
-        JButton quitButton = createButton("Quit", bigButtonWidth, bigButtonHeight);
-        this.setAlignmentCenter(quitButton);
+        JButton quitButton = guiUtil.createButton("Quit", guiUtil.bigButtonWidth, guiUtil.bigButtonHeight);
+        guiUtil.setAlignmentCenter(quitButton);
         quitButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -152,15 +156,15 @@ public class ManagerUI extends GuiUtil
         // Display
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(infoButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(createStaffButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(deleteStaffButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(addItemButton);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(quitButton);
         panel.add(Box.createVerticalGlue());
 
@@ -171,6 +175,8 @@ public class ManagerUI extends GuiUtil
     //=======================================Information UI=======================================
     private void displayInfo()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("Manager.Information");
         frame.setSize(600, 700);
@@ -186,13 +192,13 @@ public class ManagerUI extends GuiUtil
 
         // Title Label
         JLabel titleLabel = new JLabel("Information");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
-        this.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
 
         // Display
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createHorizontalStrut(verticalStrut));
+        panel.add(Box.createHorizontalStrut(guiUtil.verticalStrut));
         panel.add(ctrl.displayInfo());
         panel.add(Box.createVerticalGlue());
 
@@ -204,7 +210,7 @@ public class ManagerUI extends GuiUtil
         backPanel.setLayout(new BoxLayout(backPanel, BoxLayout.Y_AXIS));
 
         // Back Button
-        JButton backButton = this.createButton("Back", smallButtonWidth, bigButtonHeight);
+        JButton backButton = guiUtil.createButton("Back", guiUtil.smallButtonWidth, guiUtil.bigButtonHeight);
         backButton.setAlignmentY(Component.TOP_ALIGNMENT);
         backButton.addActionListener((ActionEvent e) -> 
         {
@@ -213,7 +219,7 @@ public class ManagerUI extends GuiUtil
         });
 
         // Display
-        backPanel.add(Box.createVerticalStrut(verticalStrut));
+        backPanel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         backPanel.add(backButton);
 
 
@@ -234,9 +240,11 @@ public class ManagerUI extends GuiUtil
     //========================================JoinShop UI=========================================
     private void displayJoinShop()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("Manager.JoinShop");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         this.setDefaultWindowClose(frame);
 
@@ -250,8 +258,8 @@ public class ManagerUI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Join Shop");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
-        this.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
 
 
 
@@ -259,20 +267,20 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel checkInCodePanel = new JPanel();
         checkInCodePanel.setLayout(new BoxLayout(checkInCodePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(checkInCodePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(checkInCodePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel checkInCodeLabel = new JLabel("CheckIn Code:");
-        this.setAlignmentCenter(checkInCodeLabel);
-        this.setFixedSize(checkInCodeLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setAlignmentCenter(checkInCodeLabel);
+        guiUtil.setFixedSize(checkInCodeLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // TextField
-        JTextField checkInCodeTextField = new JTextField(this.textFieldAmount);
+        JTextField checkInCodeTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         checkInCodePanel.add(Box.createHorizontalGlue());
         checkInCodePanel.add(checkInCodeLabel);
-        checkInCodePanel.add(Box.createHorizontalStrut(horizontalStrut));
+        checkInCodePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         checkInCodePanel.add(checkInCodeTextField);
         checkInCodePanel.add(Box.createHorizontalGlue());
 
@@ -282,19 +290,19 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setAlignmentCenter(buttonPanel);
+        guiUtil.setAlignmentCenter(buttonPanel);
 
         // Cancel Button
-        JButton cancelButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(cancelButton);
+        JButton cancelButton = guiUtil.createButton("Cancel", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
             
         });
 
         // Join Button
-        JButton joinButton = this.createButton("Join", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(joinButton);
+        JButton joinButton = guiUtil.createButton("Join", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(joinButton);
         joinButton.addActionListener((ActionEvent e) -> 
         {
             
@@ -303,7 +311,7 @@ public class ManagerUI extends GuiUtil
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         buttonPanel.add(joinButton);
         buttonPanel.add(Box.createHorizontalGlue());
 
@@ -312,9 +320,9 @@ public class ManagerUI extends GuiUtil
         // ===Display===
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(checkInCodePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
 
@@ -325,29 +333,31 @@ public class ManagerUI extends GuiUtil
     //=======================================CreateStaff UI=======================================
     private void displayCreateStaff()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("Manager.CreateStaff");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         this.setDefaultWindowClose(frame);
 
         // ===Panel===
-        JPanel panel = this.getMainPanel();
+        JPanel panel = guiUtil.getMainPanel();
 
-        JLabel titleLabel = this.getTitleLabel("Create Staff");
-        JPanel namePanel = this.getTextPanel("Name:");
-        JPanel userNamePanel = this.getTextPanel("User Name:");
-        JPanel passwordPanel = this.getPasswordPanel("Password:");
+        JLabel titleLabel = guiUtil.getTitleLabel("Create Staff");
+        JPanel namePanel = guiUtil.getTextPanel("Name:");
+        JPanel userNamePanel = guiUtil.getTextPanel("User Name:");
+        JPanel passwordPanel = guiUtil.getPasswordPanel("Password:");
 
         // ===Button Panel===
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setAlignmentCenter(buttonPanel);
+        guiUtil.setAlignmentCenter(buttonPanel);
 
         // Cancel Button
-        JButton cancelButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(cancelButton);
+        JButton cancelButton = guiUtil.createButton("Cancel", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
             frame.dispose();
@@ -355,8 +365,8 @@ public class ManagerUI extends GuiUtil
         });
 
         // Create Button
-        JButton createButton = this.createButton("Create", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(createButton);
+        JButton createButton = guiUtil.createButton("Create", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(createButton);
         createButton.addActionListener((ActionEvent e) -> 
         {
             
@@ -365,7 +375,7 @@ public class ManagerUI extends GuiUtil
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         buttonPanel.add(createButton);
         buttonPanel.add(Box.createHorizontalGlue());
 
@@ -373,13 +383,13 @@ public class ManagerUI extends GuiUtil
         // ===Display===
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(namePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(userNamePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(passwordPanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
         
@@ -390,9 +400,11 @@ public class ManagerUI extends GuiUtil
     //=======================================DeleteStaff UI=======================================
     private void displayDeleteStaff()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("Manager.DeleteStaff");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         this.setDefaultWindowClose(frame);
 
@@ -406,8 +418,8 @@ public class ManagerUI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Delete Staff");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
-        this.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
 
 
 
@@ -415,20 +427,20 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel idPanel = new JPanel();
         idPanel.setLayout(new BoxLayout(idPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(idPanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(idPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel idLabel = new JLabel("Id:");
-        this.setAlignmentCenter(idLabel);
-        this.setFixedSize(idLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setAlignmentCenter(idLabel);
+        guiUtil.setFixedSize(idLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // TextField
-        JTextField idTextField = new JTextField(this.textFieldAmount);
+        JTextField idTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         idPanel.add(Box.createHorizontalGlue());
         idPanel.add(idLabel);
-        idPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        idPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         idPanel.add(idTextField);
         idPanel.add(Box.createHorizontalGlue());
 
@@ -438,19 +450,19 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setAlignmentCenter(buttonPanel);
+        guiUtil.setAlignmentCenter(buttonPanel);
 
         // Cancel Button
-        JButton cancelButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(cancelButton);
+        JButton cancelButton = guiUtil.createButton("Cancel", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
             
         });
 
         // Delete Button
-        JButton deleteButton = this.createButton("Delete", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(deleteButton);
+        JButton deleteButton = guiUtil.createButton("Delete", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(deleteButton);
         deleteButton.addActionListener((ActionEvent e) -> 
         {
             
@@ -459,7 +471,7 @@ public class ManagerUI extends GuiUtil
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         buttonPanel.add(deleteButton);
         buttonPanel.add(Box.createHorizontalGlue());
 
@@ -468,9 +480,9 @@ public class ManagerUI extends GuiUtil
         // ===Display===
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(idPanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
 
@@ -481,9 +493,11 @@ public class ManagerUI extends GuiUtil
     //=========================================AddItem UI=========================================
     private void displayAddItem()
     {
+        GuiUtil guiUtil = GuiUtil.getInstance();
+
         // ===Frame===
         JFrame frame = new JFrame("Manager.AddItem");
-        frame.setSize(frameWidth, frameHeight);
+        frame.setSize(guiUtil.frameWidth, guiUtil.frameHeight);
         frame.setResizable(true);
         this.setDefaultWindowClose(frame);
 
@@ -495,8 +509,8 @@ public class ManagerUI extends GuiUtil
 
         // ===Title Label===
         JLabel titleLabel = new JLabel("Add Item");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, bigTitleSize));
-        this.setAlignmentCenter(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, guiUtil.bigTitleSize));
+        guiUtil.setAlignmentCenter(titleLabel);
 
 
 
@@ -505,20 +519,20 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(namePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(namePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel nameLabel = new JLabel("Name:");
-        this.setAlignmentCenter(nameLabel);
-        this.setFixedSize(nameLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setAlignmentCenter(nameLabel);
+        guiUtil.setFixedSize(nameLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // TextField
-        JTextField nameTextField = new JTextField(this.textFieldAmount);
+        JTextField nameTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         namePanel.add(Box.createHorizontalGlue());
         namePanel.add(nameLabel);
-        namePanel.add(Box.createHorizontalStrut(horizontalStrut));
+        namePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         namePanel.add(nameTextField);
         namePanel.add(Box.createHorizontalGlue());
 
@@ -528,20 +542,20 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel pricePanel = new JPanel();
         pricePanel.setLayout(new BoxLayout(pricePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(pricePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(pricePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel priceLabel = new JLabel("Price:");
-        this.setAlignmentCenter(priceLabel);
-        this.setFixedSize(priceLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setAlignmentCenter(priceLabel);
+        guiUtil.setFixedSize(priceLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // TextField
-        JTextField priceTextField = new JTextField(this.textFieldAmount);
+        JTextField priceTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         pricePanel.add(Box.createHorizontalGlue());
         pricePanel.add(priceLabel);
-        pricePanel.add(Box.createHorizontalStrut(horizontalStrut));
+        pricePanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         pricePanel.add(priceTextField);
         pricePanel.add(Box.createHorizontalGlue());
 
@@ -551,12 +565,12 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel itemTypePanel = new JPanel();
         itemTypePanel.setLayout(new BoxLayout(itemTypePanel, BoxLayout.X_AXIS));
-        this.setFixedSize(itemTypePanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(itemTypePanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel itemTypeLabel = new JLabel("ItemType:");
-        this.setAlignmentCenter(itemTypeLabel);
-        this.setFixedSize(itemTypeLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setAlignmentCenter(itemTypeLabel);
+        guiUtil.setFixedSize(itemTypeLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // JList
 
@@ -566,20 +580,20 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel amountPanel = new JPanel();
         amountPanel.setLayout(new BoxLayout(amountPanel, BoxLayout.X_AXIS));
-        this.setFixedSize(amountPanel, panelTextFieldWidth, panelTextFieldHeight);
+        guiUtil.setFixedSize(amountPanel, guiUtil.panelTextFieldWidth, guiUtil.panelTextFieldHeight);
 
         // Label
         JLabel amountLabel = new JLabel("Amount:");
-        this.setAlignmentCenter(amountLabel);
-        this.setFixedSize(amountLabel, smallLabelWidth, smallLabelHeight);
+        guiUtil.setAlignmentCenter(amountLabel);
+        guiUtil.setFixedSize(amountLabel, guiUtil.smallLabelWidth, guiUtil.smallLabelHeight);
 
         // TextField
-        JTextField amountTextField = new JTextField(this.textFieldAmount);
+        JTextField amountTextField = new JTextField(guiUtil.textFieldAmount);
 
         // Display
         amountPanel.add(Box.createHorizontalGlue());
         amountPanel.add(amountLabel);
-        amountPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        amountPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         amountPanel.add(amountTextField);
         amountPanel.add(Box.createHorizontalGlue());
 
@@ -589,19 +603,19 @@ public class ManagerUI extends GuiUtil
         // Panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        this.setAlignmentCenter(buttonPanel);
+        guiUtil.setAlignmentCenter(buttonPanel);
 
         // Cancel Button
-        JButton cancelButton = this.createButton("Cancel", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(cancelButton);
+        JButton cancelButton = guiUtil.createButton("Cancel", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(cancelButton);
         cancelButton.addActionListener((ActionEvent e) -> 
         {
             
         });
 
         // Add Button
-        JButton addButton = this.createButton("Add", smallButtonWidth, smallButtonHeight);
-        this.setAlignmentCenter(addButton);
+        JButton addButton = guiUtil.createButton("Add", guiUtil.smallButtonWidth, guiUtil.smallButtonHeight);
+        guiUtil.setAlignmentCenter(addButton);
         addButton.addActionListener((ActionEvent e) -> 
         {
             
@@ -610,7 +624,7 @@ public class ManagerUI extends GuiUtil
         // Display
         buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(cancelButton);
-        buttonPanel.add(Box.createHorizontalStrut(horizontalStrut));
+        buttonPanel.add(Box.createHorizontalStrut(guiUtil.horizontalStrut));
         buttonPanel.add(addButton);
         buttonPanel.add(Box.createHorizontalGlue());
 
@@ -619,15 +633,15 @@ public class ManagerUI extends GuiUtil
         // ===Display===
         panel.add(Box.createVerticalGlue());
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(namePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(pricePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(itemTypePanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(amountPanel);
-        panel.add(Box.createVerticalStrut(verticalStrut));
+        panel.add(Box.createVerticalStrut(guiUtil.verticalStrut));
         panel.add(buttonPanel);
         panel.add(Box.createVerticalGlue());
 

@@ -3,10 +3,19 @@ package Util;
 import Obj.Data.ItemType;
 import java.util.Random;
 
-public abstract class ObjUtil extends GuiUtil
+public class ObjUtil
 {
+    public ObjUtil instance;
+
+    //=========================================Singleton==========================================
+    public ObjUtil getInstance()
+    {
+        if (instance == null) instance = new ObjUtil();
+        return instance;
+    }
+
     //===========================================Other============================================
-    protected String getRandomStr(int length)
+    public final String getRandomStr(int length)
     {
         if (length <= 0)
         {
@@ -28,7 +37,7 @@ public abstract class ObjUtil extends GuiUtil
     }
 
     //==========================================Convert===========================================
-    protected ItemType getItemTypeFromInt(int value)
+    public final ItemType getItemTypeFromInt(int value)
     {
         if (value == 1) return ItemType.Food;
         else if (value == 2) return ItemType.Cloth;
@@ -36,7 +45,7 @@ public abstract class ObjUtil extends GuiUtil
         else return null;
     }
 
-    protected int getIntFromItemType(ItemType itemType)
+    public final int getIntFromItemType(ItemType itemType)
     {
         if (itemType == ItemType.Food) return 1;
         else if (itemType == ItemType.Cloth) return 2;
