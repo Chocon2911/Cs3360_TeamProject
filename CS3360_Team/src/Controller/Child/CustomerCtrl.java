@@ -20,7 +20,27 @@ public class CustomerCtrl extends AbstractObjCtrl
     @SuppressWarnings("unchecked")
     protected Customer queryInfo()
     {
-        return CustomerDb.getInstance().queryCustomerData(id);
+        Customer customer = CustomerDb.getInstance().queryCustomerData(id);
+
+        // Get CustomerRequests of Customer From Db
+        List<CustomerRequest> crs = new ArrayList<>();
+        for (CustomerRequest cr : customer.getCustomerRequests())
+        {
+            CustomerRequest newCr = CustomerRequestDb.getInstance().queryCustomerRequestData(cr.getId());
+            List<RequestedItem> ris = new ArrayList<>();
+            // Get RequestedItems of CustomerRequest From Db
+            for (RequestedItem ri : newCr.getRequestedItems())
+            {
+                RequestedItem newRi = RequestedItemDb.getInstance().queryRequestedItemData(ri.getId());
+                ris.add(newRi);
+            }
+            
+            newCr.setRequestedItems(ris);
+            crs.add(newCr);
+        }
+        
+        customer.setCustomerRequests(crs);
+        return customer;
     }
     @Override
     protected <T> String updateInfo(T info)
